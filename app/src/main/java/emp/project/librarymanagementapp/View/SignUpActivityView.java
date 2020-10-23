@@ -1,0 +1,77 @@
+package emp.project.librarymanagementapp.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import emp.project.librarymanagementapp.Controller.SignUpController;
+import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
+import emp.project.librarymanagementapp.R;
+
+@SuppressWarnings("ALL")
+public class SignUpActivityView extends AppCompatActivity implements SignUpInterface.SignUpView {
+    Toolbar toolbar;
+    EditText txt_username,txt_password,txt_checkPassword;
+    Button btn_signup;
+    SignUpController controller=new SignUpController(SignUpActivityView.this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_sign_up_view);
+
+        InitViews();
+
+    }
+
+    @Override
+    public void InitViews() {
+        toolbar=findViewById(R.id.Toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        txt_password=findViewById(R.id.txt_password);
+        txt_username=findViewById(R.id.txt_username);
+        txt_checkPassword=findViewById(R.id.txt_checkPassword);
+        btn_signup=findViewById(R.id.btn_signup);
+        btn_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.insertNewAccount(txt_username.getText().toString(),
+                        txt_password.getText().toString(),txt_checkPassword.getText().toString());
+            }
+        });
+    }
+
+    @Override
+    public void displayStatusMessage(String message) {
+        Toast.makeText(SignUpActivityView.this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void eraseEditTexts() {
+        txt_username.getText().clear();
+        txt_password.getText().clear();
+        txt_checkPassword.getText().clear();
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            finish();
+        }
+        return false;
+    }
+}

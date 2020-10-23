@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:layout_margin="10dp"
+                app:cardCornerRadius="5dp"
+                app:cardBackgroundColor="#E4FAF8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/book_img"
+                    android:layout_margin="10dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:text="@string/book_title" />
+
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/txt_book_title"
+                    android:layout_width="match_parent"
+                    android:textStyle="italic"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title"
+                    />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_return"
+            android:backgroundTint="#ED0427"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

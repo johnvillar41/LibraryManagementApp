@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    android:clickable="true"
+    android:id="@+id/faqs"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_height="wrap_content"
+    android:focusable="true">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        android:background="@drawable/faqlogo"
+        android:id="@+id/circle_image"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="140dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="130dp" >
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question2"
+                    android:id="@+id/txt_answer"/>
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/answer"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question2"
+                    android:id="@+id/txt_reply"/>
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <Button
+            android:layout_margin="5dp"
+            android:text="@string/remove"
+            android:id="@+id/btn_remove"
+            android:background="@drawable/button_smooth_red"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

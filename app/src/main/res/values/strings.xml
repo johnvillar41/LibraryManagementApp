@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">LibraryManagementApp</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="library_management_system">Library Management System</string>
+    <string name="no_account_yet">No Account Yet? </string>
+    <string name="sign_up_now">Sign Up Now</string>
+    <string name="sign_up_form">Sign Up Form</string>
+    <string name="library_nmanagement_nsystem">Library\nManagement\nSystem</string>
+    <string name="library_assistant">Library Assistant</string>
+    <string name="logout">Logout?</string>
+    <string name="rent_book">Rent Book</string>
+    <string name="search_book_title">Search Book Title</string>
+    <string name="cancel">Cancel</string>
+    <string name="dont_forget_to_return_all_the_books_you_have_rented">Dont forget to return all the books you have rented</string>
+    <string name="book_title">Book Title:</string>
+    <string name="title">title</string>
+    <string name="remove">Remove</string>
+    <string name="question">Question:</string>
+    <string name="question2">question</string>
+    <string name="answer">Answer</string>
+    <string name="insert_question">Insert Question:</string>
+    <string name="sumbit">Sumbit</string>
+</resources>

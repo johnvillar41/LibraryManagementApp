@@ -1,0 +1,3 @@
+include ':mysql-connector-java-5.1.9'
+include ':app'
+rootProject.name = "LibraryManagementApp"
