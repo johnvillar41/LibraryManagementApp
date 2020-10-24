@@ -37,12 +37,12 @@ import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("Convert2Lambda")
 public class BookActivityView extends AppCompatActivity implements BookInterface.BookActivityViewInterface {
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    Spinner spinner;
-    Button btn_checkout;
-    EditText txt_search;
-    BookController controller = new BookController(null, BookActivityView.this);
+    private Toolbar toolbar;
+    private RecyclerView recyclerView;
+    private Spinner spinner;
+    private Button btn_checkout;
+    private EditText txt_search;
+    private BookController controller = new BookController(null, BookActivityView.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,12 +176,6 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
                 } else {
                     try {
                         controller.directCartListToDB(BookModel.getList_cartBooks());
-                        //-----refresh page----------
-                        Intent intent=new Intent(BookActivityView.this,BookActivityView.class);
-                        startActivity(intent);
-                        finish();
-                        overridePendingTransition(0,0);
-                        //---------------------------
                     } catch (SQLException e) {
                         e.printStackTrace();
                     } catch (ClassNotFoundException e) {
@@ -207,6 +201,14 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
                 BookActivityView.this, list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void refreshPage() {
+        Intent intent=new Intent(BookActivityView.this,BookActivityView.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(0,0);
     }
 
     @Override

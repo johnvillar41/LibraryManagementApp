@@ -51,6 +51,7 @@ public class BookController implements BookInterface.BookControllerInterface {
         DbHelper db = new DbHelper();
         db.insertCartListToDB(list_cartBooks);
         view.onFailedMessage("Successfull!");
+        view.refreshPage();
     }
 
     @Override

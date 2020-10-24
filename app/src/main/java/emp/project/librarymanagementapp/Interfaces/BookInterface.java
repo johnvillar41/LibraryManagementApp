@@ -21,6 +21,7 @@ public interface BookInterface {
 
         void displayRecyclerViewBasedOnSearch(List<BookModel> list);
 
+        void refreshPage();
     }
 
     interface BookControllerInterface {
