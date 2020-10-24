@@ -13,7 +13,7 @@
         >
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:visibility="gone"
             android:id="@+id/image_emptycart"
             android:background="@drawable/emptycart"/>
@@ -45,7 +45,7 @@
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:id="@+id/recyclerview_cart"
             />
         <Button
