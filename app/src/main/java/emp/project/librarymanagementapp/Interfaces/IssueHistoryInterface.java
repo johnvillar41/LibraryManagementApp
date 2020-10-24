@@ -12,6 +12,8 @@ public interface IssueHistoryInterface {
         void displayIssueBooks(List<IssueBookModel> books);
 
         void displayIfEmptyCart(boolean isEmpty);
+
+        void displayNumberOfBooks(int total_books);
     }
     interface IssueHistoryControllerInterface{
         void directIssueBookDisplay(String username) throws SQLException, ClassNotFoundException;
@@ -19,6 +21,8 @@ public interface IssueHistoryInterface {
         void directReturnBook(IssueBookModel model) throws SQLException, ClassNotFoundException;
 
         void directCheckCart(String username) throws SQLException, ClassNotFoundException;
+
+        void directNumberBooks() throws SQLException, ClassNotFoundException;
     }
     interface  IssueHistoryDbHelperInterface{
         void Connection() throws ClassNotFoundException;
@@ -28,5 +32,7 @@ public interface IssueHistoryInterface {
         void returnBooks(IssueBookModel model) throws ClassNotFoundException, SQLException;
 
         boolean checkIfEmptyCart(String username) throws ClassNotFoundException, SQLException;
+
+        int getNumberOfBooks(String username) throws ClassNotFoundException, SQLException;
     }
 }

@@ -1,10 +1,13 @@
 package emp.project.librarymanagementapp.View;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +26,7 @@ import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.R;
 
 public class IssueHistoryActivityView extends AppCompatActivity implements IssueHistoryInterface.IssueHistoryViewInterface {
+    TextView txt_number_books;
     RecyclerView recyclerView;
     Toolbar toolbar;
     CircleImageView circleImageView;
@@ -58,6 +62,7 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
         toolbar = findViewById(R.id.Toolbar);
         recyclerView = findViewById(R.id.recyclerView);
         circleImageView=findViewById(R.id.image_emptycart);
+        txt_number_books=findViewById(R.id.txt_number_books);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,6 +70,7 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         controller.directCheckCart(LoginActivityView.getUsername());
+        controller.directNumberBooks();
     }
 
     @Override
@@ -83,6 +89,14 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
             circleImageView.setVisibility(View.VISIBLE);
         }else{
             circleImageView.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public void displayNumberOfBooks(int total_books) {
+        txt_number_books.setText(String.valueOf(total_books));
+        if(total_books>5){
+            txt_number_books.setTextColor(Color.parseColor("#FF0000"));
         }
     }
 

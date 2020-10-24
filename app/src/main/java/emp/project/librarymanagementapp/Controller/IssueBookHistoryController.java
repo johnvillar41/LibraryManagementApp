@@ -2,7 +2,6 @@ package emp.project.librarymanagementapp.Controller;
 
 import android.os.StrictMode;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -12,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
-import emp.project.librarymanagementapp.Models.BookModel;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
+import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class IssueBookHistoryController implements IssueHistoryInterface.IssueHistoryControllerInterface {
     IssueHistoryActivityView view;
@@ -43,6 +42,12 @@ public class IssueBookHistoryController implements IssueHistoryInterface.IssueHi
         view.displayIfEmptyCart(dbHelperIssueBook.checkIfEmptyCart(username));
     }
 
+    @Override
+    public void directNumberBooks() throws SQLException, ClassNotFoundException {
+        DbHelperIssueBook dbHelperIssueBook=new DbHelperIssueBook();
+        view.displayNumberOfBooks(dbHelperIssueBook.getNumberOfBooks(LoginActivityView.getUsername()));
+    }
+
     class DbHelperIssueBook implements IssueHistoryInterface.IssueHistoryDbHelperInterface{
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
@@ -66,7 +71,7 @@ public class IssueBookHistoryController implements IssueHistoryInterface.IssueHi
             Statement statement=connection.createStatement();
             ResultSet resultSet=statement.executeQuery(sqlcmd);
             while(resultSet.next()){
-                IssueBookModel model=new IssueBookModel(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),
+                model=new IssueBookModel(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),
                         resultSet.getString(4));
                 list.add(model);
             }
@@ -99,6 +104,20 @@ public class IssueBookHistoryController implements IssueHistoryInterface.IssueHi
             }else {
                 return false;
             }
+        }
+
+        @Override
+        public int getNumberOfBooks(String username) throws ClassNotFoundException, SQLException {
+            Connection();
+            int number_books=0;
+            String sqlcmd="SELECT * FROM bookcart WHERE user_username="+"'"+username+"'";
+            Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
+            Statement statement=connection.createStatement();
+            ResultSet resultSet=statement.executeQuery(sqlcmd);
+            while(resultSet.next()){
+                number_books++;
+            }
+            return number_books;
         }
     }
 }

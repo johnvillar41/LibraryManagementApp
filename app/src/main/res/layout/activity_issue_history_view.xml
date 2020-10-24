@@ -37,6 +37,27 @@
         app:civ_border_width="2dp"
         app:civ_border_color="#FFFFFF"
         android:id="@+id/image_emptycart"/>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp">
+        <TextView
+            android:textColor="#000000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of books: "/>
+        <TextView
+            android:textColor="#04F60E"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="books_number"
+            android:id="@+id/txt_number_books"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
