@@ -1,5 +1,6 @@
 package emp.project.librarymanagementapp.CustomAdapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.SQLException;
@@ -17,6 +19,7 @@ import java.util.List;
 import emp.project.librarymanagementapp.Controller.FAQController;
 import emp.project.librarymanagementapp.Models.FAQModel;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.View.BookActivityView;
 import emp.project.librarymanagementapp.View.FAQActivityView;
 
 public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyViewHolder> {
@@ -63,6 +66,30 @@ public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyView
                 }
             }
         });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Display ALert Dialog to see full reply
+                AlertDialog.Builder dialogBuilder=new AlertDialog.Builder(context);
+                LayoutInflater inflater = ((FAQActivityView) context).getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.popup_faq_question, null);
+                dialogBuilder.setView(dialogView);
+
+                TextView txt_answer=dialogView.findViewById(R.id.txt_answer_pop);
+                Button btn_back=dialogView.findViewById(R.id.btn_back);
+
+                AlertDialog dialog=dialogBuilder.create();
+                dialog.show();
+
+                txt_answer.setText(model.getFaq_reply());
+                btn_back.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -78,12 +105,14 @@ public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyView
 
         Button btn_remove;
         TextView txt_reply,txt_question;
+        CardView cardView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             btn_remove=itemView.findViewById(R.id.btn_remove);
             txt_reply=itemView.findViewById(R.id.txt_reply);
             txt_question=itemView.findViewById(R.id.txt_answer);
+            cardView=itemView.findViewById(R.id.faqs);
         }
     }
 }

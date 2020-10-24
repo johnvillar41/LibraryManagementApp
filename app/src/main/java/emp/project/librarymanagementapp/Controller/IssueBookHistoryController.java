@@ -76,13 +76,11 @@ public class IssueBookHistoryController implements IssueHistoryInterface.IssueHi
         @Override
         public void returnBooks(IssueBookModel model) throws ClassNotFoundException, SQLException {
             Connection();
-
             //Deletion
             String sqlcmd="DELETE from bookcart WHERE cart_id="+"'"+model.getCart_id()+"'";
             Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
             Statement statement=connection.createStatement();
             statement.execute(sqlcmd);
-
             //Update
             String sqlcmd2="UPDATE bookslist SET book_quantity=book_quantity+1 WHERE book_title="+"'"+model.getBook_title()+"'";
             Statement statement2=connection.createStatement();

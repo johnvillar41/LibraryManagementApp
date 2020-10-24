@@ -19,7 +19,10 @@
     <string name="remove">Remove</string>
     <string name="question">Question:</string>
     <string name="question2">question</string>
-    <string name="answer">Answer</string>
+    <string name="answer1">Answer: </string>
     <string name="insert_question">Insert Question:</string>
     <string name="sumbit">Sumbit</string>
+    <string name="answer">Answer: </string>
+    <string name="answer_here">answer here</string>
+    <string name="back">Back</string>
 </resources>

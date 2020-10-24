@@ -32,5 +32,6 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_baseline_add_24"
         android:backgroundTint="#ED0427"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        tools:targetApi="lollipop" />
 </RelativeLayout>
