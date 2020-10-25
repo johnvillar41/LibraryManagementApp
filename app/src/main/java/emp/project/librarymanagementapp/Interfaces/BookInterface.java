@@ -33,7 +33,7 @@ public interface BookInterface {
 
         void directCartListToDB(List<BookModel> list_cartBooks) throws SQLException, ClassNotFoundException;
 
-        void directAlertDialog();
+        void btnCheckOutClicked();
 
         void directGetBookBasedOnSearch(String book_title) throws SQLException, ClassNotFoundException;
     }

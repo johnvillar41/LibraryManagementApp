@@ -55,7 +55,7 @@ public class BookController implements BookInterface.BookControllerInterface {
     }
 
     @Override
-    public void directAlertDialog() {
+    public void btnCheckOutClicked() {
         view.displayAlertDialog();
     }
 

@@ -93,7 +93,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.directAlertDialog();
+                controller.btnCheckOutClicked();
             }
         });
         controller.directRecyclerView();
@@ -150,7 +150,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
         View dialogView = inflater.inflate(R.layout.popup_cartlist, null);
         dialogBuilder.setView(dialogView);
 
-        Button btn_checkout = dialogView.findViewById(R.id.btn_checkout);
+        Button btn_checkout_dialog = dialogView.findViewById(R.id.btn_checkout);
         RecyclerView recyclerView = dialogView.findViewById(R.id.recyclerview_cart);
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(BookActivityView.this, LinearLayoutManager.HORIZONTAL, false);
@@ -168,7 +168,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
             imageView.setVisibility(View.VISIBLE);
         }
 
-        btn_checkout.setOnClickListener(new View.OnClickListener() {
+        btn_checkout_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (BookModel.getList_cartBooks().size() == 0) {
