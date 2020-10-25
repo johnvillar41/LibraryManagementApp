@@ -66,7 +66,7 @@ public class BookController implements BookInterface.BookControllerInterface {
     }
 
 
-    class DbHelper implements BookInterface.DbHelperBooks {
+    private class DbHelper implements BookInterface.DbHelperBooks {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = "admin";

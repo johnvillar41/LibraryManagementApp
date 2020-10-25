@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".View.FAQActivityView"></activity>
+        <activity android:name=".View.NotificationActivityView"></activity>
+        <activity android:name=".View.FAQActivityView" />
         <activity android:name=".View.IssueHistoryActivityView" />
         <activity android:name=".View.BookActivityView" />
         <activity android:name=".View.SignUpActivityView" />

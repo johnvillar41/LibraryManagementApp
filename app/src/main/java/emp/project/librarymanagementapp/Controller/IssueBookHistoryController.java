@@ -48,7 +48,7 @@ public class IssueBookHistoryController implements IssueHistoryInterface.IssueHi
         view.displayNumberOfBooks(dbHelperIssueBook.getNumberOfBooks(LoginActivityView.getUsername()));
     }
 
-    class DbHelperIssueBook implements IssueHistoryInterface.IssueHistoryDbHelperInterface{
+    private class DbHelperIssueBook implements IssueHistoryInterface.IssueHistoryDbHelperInterface{
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = "admin";

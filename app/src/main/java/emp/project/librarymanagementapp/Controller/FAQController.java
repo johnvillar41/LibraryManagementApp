@@ -48,7 +48,7 @@ public class FAQController implements FAQInterface.FAQController {
         faqdBhelper.removeFAQ(id);
     }
 
-    class FAQDBhelper implements FAQInterface.FAQDbhelper{
+    private class FAQDBhelper implements FAQInterface.FAQDbhelper{
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = "admin";

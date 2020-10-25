@@ -44,7 +44,7 @@ public class SignUpController implements SignUpInterface.SignUpController {
         }
     }
 
-    class DbHelper_SignUp implements SignUpInterface.Dbhelper_SignUp {
+    private class DbHelper_SignUp implements SignUpInterface.Dbhelper_SignUp {
         private String DB_NAME="jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER="admin";
         private String PASS="admin";
