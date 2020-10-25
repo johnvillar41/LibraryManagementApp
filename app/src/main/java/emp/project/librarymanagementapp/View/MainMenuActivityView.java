@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +80,8 @@ public class MainMenuActivityView extends AppCompatActivity implements MainMenuI
 
     @Override
     public void logOut() {
+        Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        txt_logout.startAnimation(animFadein);
         Intent intent=new Intent(MainMenuActivityView.this,LoginActivityView.class);
         startActivity(intent);
         finish();
