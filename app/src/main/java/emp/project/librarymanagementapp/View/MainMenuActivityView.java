@@ -76,6 +76,8 @@ public class MainMenuActivityView extends AppCompatActivity implements MainMenuI
     @Override
     public void goToNotifs() {
         Toast.makeText(MainMenuActivityView.this,"Notifications",Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(MainMenuActivityView.this,NotificationActivityView.class);
+        startActivity(intent);
     }
 
     @Override

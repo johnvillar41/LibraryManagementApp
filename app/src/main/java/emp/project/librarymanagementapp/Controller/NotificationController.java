@@ -1,5 +1,6 @@
 package emp.project.librarymanagementapp.Controller;
 
+import android.graphics.ColorSpace;
 import android.os.StrictMode;
 
 import java.sql.Array;
@@ -58,31 +59,17 @@ public class NotificationController implements NotificationInterface.Notificatio
 
     @Override
     public void getAllNotifications() {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Dbhelper dbhelper = new Dbhelper();
-                try {
-                    view.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            view.displayProgressBar();
-                        }
-                    });
-                    view.displayNotifications(dbhelper.getAllNotifications());
-                    view.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            view.hideProgressBar();
-                        }
-                    });
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        Dbhelper dbhelper=new Dbhelper();
+        view.displayProgressBar();
+        view.displayNotifications(dbhelper.getAllNotifications());
+        view.hideProgressBar();
+    }
+
+    @Override
+    public void onDeleteAllNotifClicked() throws SQLException, ClassNotFoundException {
+        Dbhelper dbhelper=new Dbhelper();
+        dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
+        view.refreshPage();
     }
 
     private class Dbhelper implements NotificationInterface.NotificationDBhelper {
@@ -101,17 +88,21 @@ public class NotificationController implements NotificationInterface.Notificatio
         }
 
         @Override
-        public List<NotificationModel> getAllNotifications() throws ClassNotFoundException, SQLException {
-            Connection();
+        public List<NotificationModel> getAllNotifications() {
             List<NotificationModel> list = new ArrayList<>();
-            String sqlcmd = "SELECT * FROM notifications";
-            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlcmd);
-            while (resultSet.next()) {
-                model = new NotificationModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4));
-                list.add(model);
+            try{
+                Connection();
+                String sqlcmd = "SELECT * FROM notifications";
+                Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sqlcmd);
+                while (resultSet.next()) {
+                    model = new NotificationModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+                            resultSet.getString(4));
+                    list.add(model);
+                }
+            }catch(Exception e){
+                e.printStackTrace();
             }
             return list;
         }
