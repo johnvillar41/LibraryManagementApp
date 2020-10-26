@@ -9,6 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:id="@+id/Toolbar"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:visibility="invisible"
+        android:id="@+id/imageViewEmpty"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginTop="?actionBarSize"

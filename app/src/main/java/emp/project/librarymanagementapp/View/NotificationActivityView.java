@@ -1,11 +1,13 @@
 package emp.project.librarymanagementapp.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -18,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import emp.project.librarymanagementapp.Controller.NotificationController;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewIssueHistory;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewNotification;
@@ -30,6 +33,7 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
     private ProgressBar progressBar;
     private FloatingActionButton floatingActionButton;
     private Toolbar toolbar;
+    private CircleImageView circleImageView;
     private NotificationController controller=new NotificationController(NotificationActivityView.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +57,24 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
         recyclerView=findViewById(R.id.recyclerView);
         progressBar=findViewById(R.id.progressBar);
         floatingActionButton=findViewById(R.id.floating_action_button);
+        circleImageView=findViewById(R.id.imageViewEmpty);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.onRemoveButtonClicked();
+                AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(NotificationActivityView.this);
+                alertDialogBuilder.setTitle("Delete All Notifications")
+                        .setIcon(R.drawable.trash)
+                        .setMessage("Are you sure you want to delete all notifications?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                controller.onRemoveButtonClicked();
+                            }
+                        })
+                        .setNegativeButton("No",null);
+                AlertDialog dialog=alertDialogBuilder.create();
+                dialog.show();
             }
         });
         controller.getAllNotifications();
@@ -89,7 +106,10 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
                 NotificationActivityView.this, list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
-
+        if(adapter.getItemCount()==0){
+            circleImageView.setImageResource(R.drawable.notifempty);
+            circleImageView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

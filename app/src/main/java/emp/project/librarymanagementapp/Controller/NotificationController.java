@@ -70,6 +70,7 @@ public class NotificationController implements NotificationInterface.Notificatio
         Dbhelper dbhelper=new Dbhelper();
         dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
         view.refreshPage();
+        view.displayNotifications(dbhelper.getAllNotifications());
     }
 
     private class Dbhelper implements NotificationInterface.NotificationDBhelper {
