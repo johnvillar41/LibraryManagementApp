@@ -15,7 +15,7 @@ public interface FAQInterface {
 
         void displayErrorMessage(String message,EditText textErrorField);
     }
-    interface  FAQController{
+    interface FAQPresenter {
         void directToDisplayFAQ() throws SQLException, ClassNotFoundException;
 
         void directToNewQuestion(String question) throws SQLException, ClassNotFoundException;

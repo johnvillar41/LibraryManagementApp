@@ -1,13 +1,13 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
 import emp.project.librarymanagementapp.Interfaces.MainMenuInterface;
 import emp.project.librarymanagementapp.View.MainMenuActivityView;
 
-public class MainMenuController implements MainMenuInterface.MainMenuController {
+public class MainMenuPresenter implements MainMenuInterface.MainMenuPresenter {
 
     MainMenuActivityView view;
 
-    public MainMenuController(MainMenuActivityView view) {
+    public MainMenuPresenter(MainMenuActivityView view) {
         this.view = view;
     }
 

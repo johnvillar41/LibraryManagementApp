@@ -1,4 +1,4 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
 import android.os.StrictMode;
 import android.widget.EditText;
@@ -15,12 +15,12 @@ import emp.project.librarymanagementapp.Interfaces.FAQInterface;
 import emp.project.librarymanagementapp.Models.FAQModel;
 import emp.project.librarymanagementapp.View.FAQActivityView;
 
-public class FAQController implements FAQInterface.FAQController {
+public class FAQPresenter implements FAQInterface.FAQPresenter {
 
     FAQActivityView view;
     FAQModel model;
 
-    public FAQController(FAQActivityView view) {
+    public FAQPresenter(FAQActivityView view) {
         this.view = view;
         this.model=new FAQModel();
     }

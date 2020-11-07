@@ -28,7 +28,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Controller.BookController;
+import emp.project.librarymanagementapp.Presenter.BookPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookCart;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookList;
 import emp.project.librarymanagementapp.Interfaces.BookInterface;
@@ -42,7 +42,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
     private Spinner spinner;
     private Button btn_checkout;
     private EditText txt_search;
-    private BookController controller = new BookController(null, BookActivityView.this);
+    private BookPresenter presenter = new BookPresenter(null, BookActivityView.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 try {
-                    controller.directGetBookBasedOnSearch(txt_search.getText().toString());
+                    presenter.directGetBookBasedOnSearch(txt_search.getText().toString());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
@@ -93,11 +93,11 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.btnCheckOutClicked();
+                presenter.btnCheckOutClicked();
             }
         });
-        controller.directRecyclerView();
-        controller.directBookCategory();
+        presenter.directRecyclerView();
+        presenter.directBookCategory();
     }
 
     @Override
@@ -108,7 +108,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 try {
-                    controller.directRecyclerViewBasedOnCategory(spinner.getSelectedItem().toString());
+                    presenter.directRecyclerViewBasedOnCategory(spinner.getSelectedItem().toString());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
@@ -175,7 +175,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
                     Toast.makeText(BookActivityView.this, "Empty Cart!", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
-                        controller.directCartListToDB(BookModel.getList_cartBooks());
+                        presenter.directCartListToDB(BookModel.getList_cartBooks());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     } catch (ClassNotFoundException e) {

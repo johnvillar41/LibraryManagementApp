@@ -24,8 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.sql.SQLException;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Controller.FAQController;
-import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookList;
+import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewFAQ;
 import emp.project.librarymanagementapp.Interfaces.FAQInterface;
 import emp.project.librarymanagementapp.Models.FAQModel;
@@ -36,7 +35,7 @@ public class FAQActivityView extends AppCompatActivity implements FAQInterface.F
     Toolbar toolbar;
     RecyclerView recyclerView;
     FloatingActionButton floatingActionButton;
-    FAQController controller=new FAQController(FAQActivityView.this);
+    FAQPresenter presenter =new FAQPresenter(FAQActivityView.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +79,9 @@ public class FAQActivityView extends AppCompatActivity implements FAQInterface.F
                     public void onClick(View v) {
                         try {
                             if(txt_question.getText().length()==0){
-                                controller.directToErrorMessage(txt_question);
+                                presenter.directToErrorMessage(txt_question);
                             }else{
-                                controller.directToNewQuestion(txt_question.getText().toString());
+                                presenter.directToNewQuestion(txt_question.getText().toString());
                                 dialog.cancel();
                                 //refresh-----------
                                 Intent intent=new Intent(FAQActivityView.this,FAQActivityView.class);
@@ -106,7 +105,7 @@ public class FAQActivityView extends AppCompatActivity implements FAQInterface.F
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        controller.directToDisplayFAQ();
+        presenter.directToDisplayFAQ();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
 import android.os.StrictMode;
 
@@ -13,11 +13,11 @@ import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
 import emp.project.librarymanagementapp.Models.LoginModel;
 import emp.project.librarymanagementapp.View.SignUpActivityView;
 
-public class SignUpController implements SignUpInterface.SignUpController {
+public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
     SignUpActivityView view;
     LoginModel model;
 
-    public SignUpController(SignUpActivityView view) {
+    public SignUpPresenter(SignUpActivityView view) {
         this.view = view;
         this.model=new LoginModel();
     }

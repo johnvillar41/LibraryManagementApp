@@ -1,4 +1,4 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
 import android.os.StrictMode;
 
@@ -15,11 +15,11 @@ import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
-public class IssueBookHistoryController implements IssueHistoryInterface.IssueHistoryControllerInterface {
+public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHistoryPresenterInterface {
     IssueHistoryActivityView view;
     IssueBookModel model;
 
-    public IssueBookHistoryController(IssueHistoryActivityView view) {
+    public IssueBookHistoryPresenter(IssueHistoryActivityView view) {
         this.view = view;
         this.model=new IssueBookModel();
     }

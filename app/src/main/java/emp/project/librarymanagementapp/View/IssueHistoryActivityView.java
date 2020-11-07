@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import emp.project.librarymanagementapp.Controller.IssueBookHistoryController;
+import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewIssueHistory;
 import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
@@ -29,7 +29,7 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
     RecyclerView recyclerView;
     Toolbar toolbar;
     CircleImageView circleImageView;
-    IssueBookHistoryController controller = new IssueBookHistoryController(IssueHistoryActivityView.this);
+    IssueBookHistoryPresenter presenter = new IssueBookHistoryPresenter(IssueHistoryActivityView.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
         }
 
         try {
-            controller.directIssueBookDisplay(LoginActivityView.getUsername());
+            presenter.directIssueBookDisplay(LoginActivityView.getUsername());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -68,8 +68,8 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        controller.directCheckCart(LoginActivityView.getUsername());
-        controller.directNumberBooks();
+        presenter.directCheckCart(LoginActivityView.getUsername());
+        presenter.directNumberBooks();
     }
 
     @Override

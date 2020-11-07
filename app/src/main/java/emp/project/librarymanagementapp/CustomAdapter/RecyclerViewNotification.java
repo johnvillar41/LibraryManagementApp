@@ -1,6 +1,5 @@
 package emp.project.librarymanagementapp.CustomAdapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import emp.project.librarymanagementapp.Controller.NotificationController;
+import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.R;
 import emp.project.librarymanagementapp.View.NotificationActivityView;
@@ -22,12 +21,12 @@ import emp.project.librarymanagementapp.View.NotificationActivityView;
 public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewNotification.MyViewHolder>{
 
     Context context;
-    NotificationController controller;
+    NotificationPresenter controller;
     List<NotificationModel>list;
 
     public RecyclerViewNotification(Context context, List<NotificationModel> list) {
         this.context = context;
-        this.controller = new NotificationController((NotificationActivityView) context);
+        this.controller = new NotificationPresenter((NotificationActivityView) context);
         this.list = list;
     }
 

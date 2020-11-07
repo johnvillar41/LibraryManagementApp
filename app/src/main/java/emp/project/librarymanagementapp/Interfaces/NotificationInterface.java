@@ -17,7 +17,7 @@ public interface NotificationInterface {
 
         void displayNotifications(List<NotificationModel>list);
     }
-    interface NotificationControllerInterface{
+    interface NotificationPresenterInterface {
         void onRemoveButtonClicked();
 
         void getAllNotifications();

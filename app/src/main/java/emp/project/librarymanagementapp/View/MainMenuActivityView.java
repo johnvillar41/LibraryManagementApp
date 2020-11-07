@@ -13,15 +13,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import emp.project.librarymanagementapp.Controller.MainMenuController;
-import emp.project.librarymanagementapp.Interfaces.LoginInterface;
+import emp.project.librarymanagementapp.Presenter.MainMenuPresenter;
 import emp.project.librarymanagementapp.Interfaces.MainMenuInterface;
 import emp.project.librarymanagementapp.R;
 
 public class MainMenuActivityView extends AppCompatActivity implements MainMenuInterface.MainMenuViewInterface, View.OnClickListener {
-    TextView txt_username,txt_logout;
-    CardView booksList,issueBooks,faqs,notifs;
-    MainMenuController controller=new MainMenuController(MainMenuActivityView.this);
+    TextView txt_username, txt_logout;
+    CardView booksList, issueBooks, faqs, notifs;
+    MainMenuPresenter presenter = new MainMenuPresenter(MainMenuActivityView.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +35,12 @@ public class MainMenuActivityView extends AppCompatActivity implements MainMenuI
 
     @Override
     public void InitViews() {
-        txt_username=findViewById(R.id.txt_username);
-        txt_logout=findViewById(R.id.txt_logout);
-        booksList=findViewById(R.id.booksList);
-        issueBooks=findViewById(R.id.issueBooks);
-        faqs=findViewById(R.id.faqs);
-        notifs=findViewById(R.id.notifs);
+        txt_username = findViewById(R.id.txt_username);
+        txt_logout = findViewById(R.id.txt_logout);
+        booksList = findViewById(R.id.booksList);
+        issueBooks = findViewById(R.id.issueBooks);
+        faqs = findViewById(R.id.faqs);
+        notifs = findViewById(R.id.notifs);
 
         txt_logout.setOnClickListener(this);
         booksList.setOnClickListener(this);
@@ -54,37 +54,37 @@ public class MainMenuActivityView extends AppCompatActivity implements MainMenuI
 
     @Override
     public void goToBooksList() {
-        Toast.makeText(MainMenuActivityView.this,"BooksList",Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MainMenuActivityView.this,BookActivityView.class);
+        Toast.makeText(MainMenuActivityView.this, "BooksList", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainMenuActivityView.this, BookActivityView.class);
         startActivity(intent);
     }
 
     @Override
     public void goToIssueBooks() {
-        Toast.makeText(MainMenuActivityView.this,"IssueBooks",Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MainMenuActivityView.this,IssueHistoryActivityView.class);
+        Toast.makeText(MainMenuActivityView.this, "IssueBooks", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainMenuActivityView.this, IssueHistoryActivityView.class);
         startActivity(intent);
     }
 
     @Override
     public void goToFaqs() {
-        Toast.makeText(MainMenuActivityView.this,"Faqs",Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MainMenuActivityView.this,FAQActivityView.class);
+        Toast.makeText(MainMenuActivityView.this, "Faqs", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainMenuActivityView.this, FAQActivityView.class);
         startActivity(intent);
     }
 
     @Override
     public void goToNotifs() {
-        Toast.makeText(MainMenuActivityView.this,"Notifications",Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(MainMenuActivityView.this,NotificationActivityView.class);
+        Toast.makeText(MainMenuActivityView.this, "Notifications", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainMenuActivityView.this, NotificationActivityView.class);
         startActivity(intent);
     }
 
     @Override
     public void logOut() {
-        Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
         txt_logout.startAnimation(animFadein);
-        Intent intent=new Intent(MainMenuActivityView.this,LoginActivityView.class);
+        Intent intent = new Intent(MainMenuActivityView.this, LoginActivityView.class);
         startActivity(intent);
         finish();
     }
@@ -97,25 +97,25 @@ public class MainMenuActivityView extends AppCompatActivity implements MainMenuI
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.booksList:{
-                controller.directToBooksList();
+        switch (v.getId()) {
+            case R.id.booksList: {
+                presenter.directToBooksList();
                 break;
             }
-            case R.id.issueBooks:{
-                controller.directToIssuelist();
+            case R.id.issueBooks: {
+                presenter.directToIssuelist();
                 break;
             }
-            case R.id.faqs:{
-                controller.directToFaqs();
+            case R.id.faqs: {
+                presenter.directToFaqs();
                 break;
             }
-            case R.id.notifs:{
-                controller.directToNotifs();
+            case R.id.notifs: {
+                presenter.directToNotifs();
                 break;
             }
-            case R.id.txt_logout:{
-                controller.directToLogout();
+            case R.id.txt_logout: {
+                presenter.directToLogout();
                 break;
             }
         }

@@ -1,4 +1,4 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
 import android.os.StrictMode;
 
@@ -14,12 +14,12 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 import emp.project.librarymanagementapp.Interfaces.LoginInterface;
 
 @SuppressWarnings("ALL")
-public class LoginController implements LoginInterface.LoginControllerInterface {
+public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
 
     LoginActivityView view;
     LoginModel model=new LoginModel();
 
-    public LoginController(LoginActivityView view) {
+    public LoginPresenter(LoginActivityView view) {
         this.view = view;
     }
 

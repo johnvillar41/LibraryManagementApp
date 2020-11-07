@@ -24,7 +24,7 @@ public interface BookInterface {
         void refreshPage();
     }
 
-    interface BookControllerInterface {
+    interface BookPresenterInterface {
         void directRecyclerView() throws SQLException, ClassNotFoundException;
 
         void directBookCategory() throws SQLException, ClassNotFoundException;

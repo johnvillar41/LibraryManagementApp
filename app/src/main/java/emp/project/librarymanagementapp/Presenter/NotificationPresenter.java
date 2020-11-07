@@ -1,9 +1,7 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
-import android.graphics.ColorSpace;
 import android.os.StrictMode;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,12 +15,12 @@ import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 import emp.project.librarymanagementapp.View.NotificationActivityView;
 
-public class NotificationController implements NotificationInterface.NotificationControllerInterface {
+public class NotificationPresenter implements NotificationInterface.NotificationPresenterInterface {
 
     NotificationActivityView view;
     NotificationModel model;
 
-    public NotificationController(NotificationActivityView view) {
+    public NotificationPresenter(NotificationActivityView view) {
         this.view = view;
         this.model = new NotificationModel();
     }

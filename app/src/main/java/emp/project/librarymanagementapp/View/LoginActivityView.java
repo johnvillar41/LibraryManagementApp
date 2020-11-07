@@ -15,18 +15,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import emp.project.librarymanagementapp.Controller.LoginController;
+import emp.project.librarymanagementapp.Presenter.LoginPresenter;
 import emp.project.librarymanagementapp.Interfaces.LoginInterface;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("Convert2Lambda")
 public class LoginActivityView extends AppCompatActivity implements LoginInterface.LoginViewInterface, View.OnClickListener {
-    private EditText txt_username,txt_password;
+    private EditText txt_username, txt_password;
     private Button btn_login;
     private ProgressBar progressBar;
     private TextView txt_signUp;
     public static String username;
-    private LoginController controller=new LoginController(LoginActivityView.this);
+    private LoginPresenter presenter = new LoginPresenter(LoginActivityView.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +38,14 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
 
         InitViews();
     }
+
     @Override
     public void InitViews() {
-        txt_signUp=findViewById(R.id.txt_signUp);
-        txt_username=findViewById(R.id.txt_username);
-        txt_password=findViewById(R.id.txt_password);
-        btn_login=findViewById(R.id.btn_login);
-        progressBar=findViewById(R.id.progressBar);
+        txt_signUp = findViewById(R.id.txt_signUp);
+        txt_username = findViewById(R.id.txt_username);
+        txt_password = findViewById(R.id.txt_password);
+        btn_login = findViewById(R.id.btn_login);
+        progressBar = findViewById(R.id.progressBar);
 
         btn_login.setOnClickListener(this);
         txt_signUp.setOnClickListener(this);
@@ -52,15 +53,15 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
 
     @Override
     public void onSuccess(String message) {
-        Toast.makeText(LoginActivityView.this,message,Toast.LENGTH_SHORT).show();
-        Intent intent=new Intent(LoginActivityView.this, MainMenuActivityView.class);
+        Toast.makeText(LoginActivityView.this, message, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(LoginActivityView.this, MainMenuActivityView.class);
         startActivity(intent);
         finish();
     }
 
     @Override
     public void onFailure(String message) {
-        Toast.makeText(LoginActivityView.this,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivityView.this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -75,7 +76,7 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
 
     @Override
     public void signUpForm() {
-        Intent intent=new Intent(LoginActivityView.this,SignUpActivityView.class);
+        Intent intent = new Intent(LoginActivityView.this, SignUpActivityView.class);
         startActivity(intent);
     }
 
@@ -90,14 +91,14 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.btn_login){
-            controller.getLoginCredentials(txt_username.getText().toString(),
+        if (v.getId() == R.id.btn_login) {
+            presenter.getLoginCredentials(txt_username.getText().toString(),
                     txt_password.getText().toString());
             setUsername(txt_username.getText().toString());
-        }else if(v.getId()==R.id.txt_signUp){
-            Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        } else if (v.getId() == R.id.txt_signUp) {
+            Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
             txt_signUp.startAnimation(animFadein);
-            controller.goToSignUpForm();
+            presenter.goToSignUpForm();
         }
     }
 }

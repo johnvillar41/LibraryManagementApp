@@ -13,16 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import emp.project.librarymanagementapp.Controller.SignUpController;
+import emp.project.librarymanagementapp.Presenter.SignUpPresenter;
 import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("ALL")
 public class SignUpActivityView extends AppCompatActivity implements SignUpInterface.SignUpView {
     Toolbar toolbar;
-    EditText txt_username,txt_password,txt_checkPassword;
+    EditText txt_username, txt_password, txt_checkPassword;
     Button btn_signup;
-    SignUpController controller=new SignUpController(SignUpActivityView.this);
+    SignUpPresenter presenter = new SignUpPresenter(SignUpActivityView.this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,28 +38,28 @@ public class SignUpActivityView extends AppCompatActivity implements SignUpInter
 
     @Override
     public void InitViews() {
-        toolbar=findViewById(R.id.Toolbar);
+        toolbar = findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        txt_password=findViewById(R.id.txt_password);
-        txt_username=findViewById(R.id.txt_username);
-        txt_checkPassword=findViewById(R.id.txt_checkPassword);
-        btn_signup=findViewById(R.id.btn_signup);
+        txt_password = findViewById(R.id.txt_password);
+        txt_username = findViewById(R.id.txt_username);
+        txt_checkPassword = findViewById(R.id.txt_checkPassword);
+        btn_signup = findViewById(R.id.btn_signup);
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.insertNewAccount(txt_username.getText().toString(),
-                        txt_password.getText().toString(),txt_checkPassword.getText().toString());
+                presenter.insertNewAccount(txt_username.getText().toString(),
+                        txt_password.getText().toString(), txt_checkPassword.getText().toString());
             }
         });
     }
 
     @Override
     public void displayStatusMessage(String message) {
-        Toast.makeText(SignUpActivityView.this,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(SignUpActivityView.this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -67,9 +68,10 @@ public class SignUpActivityView extends AppCompatActivity implements SignUpInter
         txt_password.getText().clear();
         txt_checkPassword.getText().clear();
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return false;

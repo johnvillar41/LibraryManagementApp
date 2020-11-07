@@ -12,7 +12,7 @@ public interface SignUpInterface {
 
         void eraseEditTexts();
     }
-    interface SignUpController{
+    interface SignUpPresenter {
         void insertNewAccount(String username,String password,String passwordCheck);
 
     }

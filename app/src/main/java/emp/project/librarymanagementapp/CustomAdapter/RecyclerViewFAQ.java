@@ -16,22 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.sql.SQLException;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Controller.FAQController;
+import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.Models.FAQModel;
 import emp.project.librarymanagementapp.R;
-import emp.project.librarymanagementapp.View.BookActivityView;
 import emp.project.librarymanagementapp.View.FAQActivityView;
 
 public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyViewHolder> {
 
     Context context;
     List<FAQModel>list;
-    FAQController controller;
+    FAQPresenter controller;
 
     public RecyclerViewFAQ(Context context, List<FAQModel> list) {
         this.context = context;
         this.list = list;
-        this.controller=new FAQController((FAQActivityView) context);
+        this.controller=new FAQPresenter((FAQActivityView) context);
     }
 
     @NonNull

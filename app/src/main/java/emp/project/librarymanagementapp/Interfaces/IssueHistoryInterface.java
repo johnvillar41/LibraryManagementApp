@@ -15,7 +15,7 @@ public interface IssueHistoryInterface {
 
         void displayNumberOfBooks(int total_books);
     }
-    interface IssueHistoryControllerInterface{
+    interface IssueHistoryPresenterInterface {
         void directIssueBookDisplay(String username) throws SQLException, ClassNotFoundException;
 
         void directReturnBook(IssueBookModel model) throws SQLException, ClassNotFoundException;

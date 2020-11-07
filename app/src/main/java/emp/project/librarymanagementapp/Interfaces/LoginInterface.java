@@ -21,7 +21,7 @@ public interface LoginInterface {
         void signUpForm();
 
     }
-    interface LoginControllerInterface{
+    interface LoginPresenterInterface {
         void getLoginCredentials(String username,String password);
 
         void goToSignUpForm();

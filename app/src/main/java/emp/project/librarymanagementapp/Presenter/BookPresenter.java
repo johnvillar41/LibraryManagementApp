@@ -1,4 +1,4 @@
-package emp.project.librarymanagementapp.Controller;
+package emp.project.librarymanagementapp.Presenter;
 
 import android.content.Context;
 import android.os.StrictMode;
@@ -17,13 +17,13 @@ import emp.project.librarymanagementapp.View.BookActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
 @SuppressWarnings("ALL")
-public class BookController implements BookInterface.BookControllerInterface {
+public class BookPresenter implements BookInterface.BookPresenterInterface {
 
     Context context;
     BookActivityView view;
     BookModel model;
 
-    public BookController(Context context, BookActivityView view) {
+    public BookPresenter(Context context, BookActivityView view) {
         this.context = context;
         this.view = view;
     }

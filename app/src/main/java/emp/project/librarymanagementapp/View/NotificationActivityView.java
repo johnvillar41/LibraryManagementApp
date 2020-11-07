@@ -21,8 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import emp.project.librarymanagementapp.Controller.NotificationController;
-import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewIssueHistory;
+import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewNotification;
 import emp.project.librarymanagementapp.Interfaces.NotificationInterface;
 import emp.project.librarymanagementapp.Models.NotificationModel;
@@ -34,7 +33,7 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
     private FloatingActionButton floatingActionButton;
     private Toolbar toolbar;
     private CircleImageView circleImageView;
-    private NotificationController controller=new NotificationController(NotificationActivityView.this);
+    private NotificationPresenter presenter =new NotificationPresenter(NotificationActivityView.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,7 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                controller.onRemoveButtonClicked();
+                                presenter.onRemoveButtonClicked();
                             }
                         })
                         .setNegativeButton("No",null);
@@ -77,7 +76,7 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
                 dialog.show();
             }
         });
-        controller.getAllNotifications();
+        presenter.getAllNotifications();
     }
 
     @Override

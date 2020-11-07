@@ -16,7 +16,7 @@ public interface MainMenuInterface {
 
         void setUsername();
     }
-    interface MainMenuController{
+    interface MainMenuPresenter {
         void directToBooksList();
 
         void directToIssuelist();
