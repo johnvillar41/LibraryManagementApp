@@ -19,7 +19,7 @@ import emp.project.librarymanagementapp.Presenter.LoginPresenter;
 import emp.project.librarymanagementapp.Interfaces.LoginInterface;
 import emp.project.librarymanagementapp.R;
 
-@SuppressWarnings("Convert2Lambda")
+@SuppressWarnings({"Convert2Lambda", "FieldCanBeLocal"})
 public class LoginActivityView extends AppCompatActivity implements LoginInterface.LoginViewInterface, View.OnClickListener {
     private EditText txt_username, txt_password;
     private Button btn_login;
@@ -27,8 +27,6 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
     private TextView txt_signUp;
     public static String username,password;
     private LoginPresenter presenter = new LoginPresenter(LoginActivityView.this);
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +88,9 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
         LoginActivityView.username = username;
     }
 
-    public static String getPassword() {
-        return password;
-    }
+    public static String getPassword() {  return password; }
 
-    public static void setPassword(String password) {
-        LoginActivityView.password = password;
-    }
+    public static void setPassword(String password) { LoginActivityView.password = password; }
 
 
     @Override
