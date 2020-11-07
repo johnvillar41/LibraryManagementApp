@@ -16,6 +16,9 @@ public class BookModel {
         return list_cartBooks;
     }
 
+    public BookModel() {
+    }
+
     public BookModel(String book_id, String book_title,
                      String book_quantity, String book_description,
                      String book_category, String book_url) {

@@ -26,6 +26,7 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
     public BookPresenter(Context context, BookActivityView view) {
         this.context = context;
         this.view = view;
+        this.model=new BookModel();
     }
 
     @Override
