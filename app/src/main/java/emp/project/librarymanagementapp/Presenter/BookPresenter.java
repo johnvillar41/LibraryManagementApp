@@ -171,9 +171,9 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlcmdSearch);
             while (resultSet.next()) {
-                BookModel bookModel = new BookModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+                model = new BookModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
                         resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
-                list.add(bookModel);
+                list.add(model);
             }
             statement.close();
             connection.close();
