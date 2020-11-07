@@ -21,12 +21,12 @@ import emp.project.librarymanagementapp.View.NotificationActivityView;
 public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewNotification.MyViewHolder>{
 
     Context context;
-    NotificationPresenter controller;
+    NotificationPresenter presenter;
     List<NotificationModel>list;
 
     public RecyclerViewNotification(Context context, List<NotificationModel> list) {
         this.context = context;
-        this.controller = new NotificationPresenter((NotificationActivityView) context);
+        this.presenter = new NotificationPresenter((NotificationActivityView) context);
         this.list = list;
     }
 

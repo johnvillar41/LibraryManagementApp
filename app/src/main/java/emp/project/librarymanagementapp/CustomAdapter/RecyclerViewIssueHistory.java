@@ -19,8 +19,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
+import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.R;
 import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
 
@@ -28,7 +28,7 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
 
     Context context;
     List<IssueBookModel>list;
-    IssueBookHistoryPresenter controller;
+    IssueBookHistoryPresenter presenter;
 
     public RecyclerViewIssueHistory(Context context, List<IssueBookModel> list) {
         this.context = context;
@@ -60,9 +60,9 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //DB Operation
-                                controller=new IssueBookHistoryPresenter((IssueHistoryActivityView) context);
+                                presenter =new IssueBookHistoryPresenter((IssueHistoryActivityView) context);
                                 try {
-                                    controller.directReturnBook(model);
+                                    presenter.directReturnBook(model);
                                     //refresh-----------
                                     Intent intent=new Intent(context,context.getClass());
                                     context.startActivity(intent);

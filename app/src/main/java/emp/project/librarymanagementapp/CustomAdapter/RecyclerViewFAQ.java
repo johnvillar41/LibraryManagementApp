@@ -25,12 +25,12 @@ public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyView
 
     Context context;
     List<FAQModel>list;
-    FAQPresenter controller;
+    FAQPresenter presenter;
 
     public RecyclerViewFAQ(Context context, List<FAQModel> list) {
         this.context = context;
         this.list = list;
-        this.controller=new FAQPresenter((FAQActivityView) context);
+        this.presenter =new FAQPresenter((FAQActivityView) context);
     }
 
     @NonNull
@@ -51,7 +51,7 @@ public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyView
             @Override
             public void onClick(View v) {
                 try {
-                    controller.directToRemoveFAQ(id);
+                    presenter.directToRemoveFAQ(id);
                     //refresh-------
                     Intent intent=new Intent(context,context.getClass());
                     context.startActivity(intent);
