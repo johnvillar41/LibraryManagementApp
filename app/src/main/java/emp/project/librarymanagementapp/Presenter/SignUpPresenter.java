@@ -63,6 +63,8 @@ public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
             String sqlcmd="INSERT INTO userlogin(user_username,user_password,user_status)VALUES("+"'"+model.getUser_username()+"','"+model.getUser_password()+"','"+model.getUser_status()+"')";
             Statement statement= (Statement) connection.createStatement();
             statement.execute(sqlcmd);
+            statement.close();
+            connection.close();
         }
     }
 

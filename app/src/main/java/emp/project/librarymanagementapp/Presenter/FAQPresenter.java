@@ -73,6 +73,9 @@ public class FAQPresenter implements FAQInterface.FAQPresenter {
                 model=new FAQModel(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3));
                 list.add(model);
             }
+            statement.close();
+            connection.close();
+            resultSet.close();
             return list;
         }
 
@@ -83,6 +86,8 @@ public class FAQPresenter implements FAQInterface.FAQPresenter {
             Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
             Statement statement=connection.createStatement();
             statement.execute(sqlcmd);
+            statement.close();
+            connection.close();
         }
 
         @Override
@@ -92,6 +97,8 @@ public class FAQPresenter implements FAQInterface.FAQPresenter {
             Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
             Statement statement=connection.createStatement();
             statement.execute(sqlcmd);
+            statement.close();
+            connection.close();
         }
     }
 }

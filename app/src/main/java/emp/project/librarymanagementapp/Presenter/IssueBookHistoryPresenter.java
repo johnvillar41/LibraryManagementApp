@@ -75,6 +75,9 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
                         resultSet.getString(4));
                 list.add(model);
             }
+            statement.close();
+            connection.close();
+            resultSet.close();
             return list;
         }
 
@@ -90,6 +93,10 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
             String sqlcmd2="UPDATE bookslist SET book_quantity=book_quantity+1 WHERE book_title="+"'"+model.getBook_title()+"'";
             Statement statement2=connection.createStatement();
             statement2.execute(sqlcmd2);
+
+            statement.close();
+            statement2.close();
+            connection.close();
         }
 
         @Override
@@ -100,8 +107,12 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
             Statement statement=connection.createStatement();
             ResultSet resultSet=statement.executeQuery(sqlcmd);
             if(!resultSet.next()){
+                statement.close();
+                connection.close();
                 return true;
             }else {
+                statement.close();
+                connection.close();
                 return false;
             }
         }
@@ -117,6 +128,9 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
             while(resultSet.next()){
                 number_books++;
             }
+            statement.close();
+            connection.close();
+            resultSet.close();
             return number_books;
         }
     }

@@ -100,6 +100,9 @@ public class NotificationPresenter implements NotificationInterface.Notification
                             resultSet.getString(4));
                     list.add(model);
                 }
+                statement.close();
+                resultSet.close();
+                connection.close();
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -113,6 +116,8 @@ public class NotificationPresenter implements NotificationInterface.Notification
             Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
             Statement statement = connection.createStatement();
             statement.execute(sqlcmd);
+            statement.close();
+            connection.close();
         }
     }
 }

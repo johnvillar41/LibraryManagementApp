@@ -87,8 +87,14 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
             Statement statement= (Statement) connection.createStatement();
             ResultSet resultSet=statement.executeQuery(sqlcmd);
             if (resultSet.next()){
+                resultSet.close();
+                statement.close();
+                connection.close();
                 return true;
             }else{
+                resultSet.close();
+                statement.close();
+                connection.close();
                 return false;
             }
         }

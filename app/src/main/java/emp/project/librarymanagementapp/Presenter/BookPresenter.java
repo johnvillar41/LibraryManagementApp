@@ -94,6 +94,9 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
                         resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
                 list.add(model);
             }
+            resultSet.close();
+            statement.close();
+            connection.close();
             return list;
         }
 
@@ -114,6 +117,9 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
                     list.add(tempList.get(i));
                 }
             }
+            resultSet.close();
+            statement.close();
+            connection.close();
             return list;
         }
 
@@ -130,22 +136,30 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
                         resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
                 list.add(model);
             }
+            resultSet.close();
+            statement.close();
+            connection.close();
             return list;
         }
 
         @Override
         public void insertCartListToDB(List<BookModel> list_cartBooks) throws ClassNotFoundException, SQLException {
             Connection();
+            Statement statement = null;
+            Statement statement2 = null;
             Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
             for (int i = 0; i < list_cartBooks.size(); i++) {
                 String sqlcmd = "INSERT INTO bookcart(user_username,book_title,book_imageurl)VALUES(" + "'" + LoginActivityView.getUsername()
                         + "','" + list_cartBooks.get(i).getBook_title() + "','"+list_cartBooks.get(i).getBook_url()+"')";
                 String sqlcmdMinusValue = "UPDATE bookslist SET book_quantity = book_quantity - 1 WHERE book_title=" + "'" + list_cartBooks.get(i).getBook_title() + "'";
-                Statement statement = connection.createStatement();
-                Statement statement2 = connection.createStatement();
+                statement = connection.createStatement();
+                statement2 = connection.createStatement();
                 statement.execute(sqlcmd);
                 statement2.execute(sqlcmdMinusValue);
             }
+            statement.close();
+            statement2.close();
+            connection.close();
         }
 
         @Override
@@ -161,6 +175,8 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
                         resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
                 list.add(bookModel);
             }
+            statement.close();
+            connection.close();
             return list;
         }
     }
