@@ -17,23 +17,23 @@ import emp.project.librarymanagementapp.Interfaces.LoginInterface;
 public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
 
     LoginActivityView view;
-    LoginModel model=new LoginModel();
+    LoginModel model = new LoginModel();
 
     public LoginPresenter(LoginActivityView view) {
         this.view = view;
     }
 
     @Override
-    public void getLoginCredentials(final String username, final String password){
+    public void getLoginCredentials(final String username, final String password) {
         view.progressBarVisible();
-        Thread thread=new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                DbHelper db=new DbHelper();
-                model=new LoginModel(username,password);
+                DbHelper db = new DbHelper();
+                model = new LoginModel(username, password);
                 try {
                     if (db.checkLoginCredentials(model) &&
-                            model.validateCredentials()){
+                            model.validateCredentials()) {
                         view.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -41,7 +41,7 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
                                 view.progressBarInvisible();
                             }
                         });
-                    }else{
+                    } else {
                         view.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -68,7 +68,8 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
                     });
                 }
             }
-        });thread.start();
+        });
+        thread.start();
     }
 
     @Override
@@ -76,11 +77,11 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
         view.signUpForm();
     }
 
-    private static class DbHelper implements LoginInterface.LoginDbHelper{
+    private class DbHelper implements LoginInterface.LoginDbHelper {
 
-        private static String DB_NAME="jdbc:mysql://192.168.1.152:3306/librarydb";
-        private static String USER=LoginActivityView.getUsername();
-        private static String PASS=LoginActivityView.getPassword();
+        private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
+        private String USER = LoginActivityView.getUsername();
+        private String PASS = LoginActivityView.getPassword();
 
         @Override
         public void Connection() throws ClassNotFoundException {
@@ -93,17 +94,17 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
         @Override
         public boolean checkLoginCredentials(LoginModel model) throws ClassNotFoundException, SQLException {
             Connection();
-            Connection connection= (Connection) DriverManager.getConnection(DB_NAME,USER,PASS);
-            String sqlcmd="SELECT * FROM userlogin WHERE user_username="+"'"+model.getUser_username()+"' AND user_password="+"'"+model.getUser_password()+
+            Connection connection = (Connection) DriverManager.getConnection(DB_NAME, USER, PASS);
+            String sqlcmd = "SELECT * FROM userlogin WHERE user_username=" + "'" + model.getUser_username() + "' AND user_password=" + "'" + model.getUser_password() +
                     "' AND user_status='Active'";
-            Statement statement= (Statement) connection.createStatement();
-            ResultSet resultSet=statement.executeQuery(sqlcmd);
-            if (resultSet.next()){
+            Statement statement = (Statement) connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sqlcmd);
+            if (resultSet.next()) {
                 resultSet.close();
                 statement.close();
                 connection.close();
                 return true;
-            }else{
+            } else {
                 resultSet.close();
                 statement.close();
                 connection.close();

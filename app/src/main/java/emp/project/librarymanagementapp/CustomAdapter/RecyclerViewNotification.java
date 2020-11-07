@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,7 +54,13 @@ public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewN
         holder.imageView_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //db operation delete
+                try {
+                    presenter.deleteNotification(model.getNotif_id());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

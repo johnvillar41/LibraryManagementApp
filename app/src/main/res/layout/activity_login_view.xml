@@ -44,27 +44,39 @@
                 android:layout_marginTop="50dp"
                 android:gravity="center"
                 >
-                <EditText
-                    android:drawableLeft="@drawable/ic_username"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
                     android:id="@+id/txt_username"
-                    android:layout_marginRight="30dp"
-                    android:textColorHint="#000000"
-                    android:hint="@string/username"
-                    android:drawableStart="@drawable/ic_username" />
-                <EditText
-                    android:inputType="textPassword"
-                    android:textColorHint="#000000"
-                    android:id="@+id/txt_password"
-                    android:drawableLeft="@drawable/ic_password"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:drawableLeft="@drawable/ic_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+
+                        android:layout_marginRight="30dp"
+                        android:textColorHint="#000000"
+                        android:hint="@string/username"
+                        android:drawableStart="@drawable/ic_username"/>
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:hint="@string/password"
-                    android:drawableStart="@drawable/ic_password" />
+                    android:id="@+id/txt_password"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:inputType="textPassword"
+                        android:textColorHint="#000000"
+
+                        android:drawableLeft="@drawable/ic_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:hint="@string/password"
+                        android:drawableStart="@drawable/ic_password"/>
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                     android:id="@+id/btn_login"
                     android:layout_width="match_parent"

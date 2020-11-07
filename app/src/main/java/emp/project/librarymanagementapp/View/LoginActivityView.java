@@ -15,13 +15,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.Objects;
+
 import emp.project.librarymanagementapp.Presenter.LoginPresenter;
 import emp.project.librarymanagementapp.Interfaces.LoginInterface;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings({"Convert2Lambda", "FieldCanBeLocal"})
 public class LoginActivityView extends AppCompatActivity implements LoginInterface.LoginViewInterface, View.OnClickListener {
-    private EditText txt_username, txt_password;
+    private TextInputLayout txt_username, txt_password;
     private Button btn_login;
     private ProgressBar progressBar;
     private TextView txt_signUp;
@@ -96,10 +101,10 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_login) {
-            presenter.getLoginCredentials(txt_username.getText().toString(),
-                    txt_password.getText().toString());
-            setUsername(txt_username.getText().toString());
-            setPassword(txt_password.getText().toString());
+            presenter.getLoginCredentials(Objects.requireNonNull(txt_username.getEditText()).getText().toString(),
+                    Objects.requireNonNull(txt_password.getEditText()).getText().toString());
+            setUsername(txt_username.getEditText().getText().toString());
+            setPassword(txt_password.getEditText().getText().toString());
         } else if (v.getId() == R.id.txt_signUp) {
             Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
             txt_signUp.startAnimation(animFadein);

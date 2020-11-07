@@ -23,9 +23,13 @@ public interface NotificationInterface {
         void getAllNotifications();
 
         void onDeleteAllNotifClicked() throws SQLException, ClassNotFoundException;
+
+        void deleteNotification(String notif_id) throws SQLException, ClassNotFoundException;
     }
     interface NotificationDBhelper{
         void Connection() throws ClassNotFoundException;
+
+        void deleteNotification(String notif_id) throws ClassNotFoundException, SQLException;
 
         List<NotificationModel> getAllNotifications() throws ClassNotFoundException, SQLException;
 

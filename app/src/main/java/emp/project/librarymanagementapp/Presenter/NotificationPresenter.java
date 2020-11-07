@@ -71,6 +71,14 @@ public class NotificationPresenter implements NotificationInterface.Notification
         view.displayNotifications(dbhelper.getAllNotifications());
     }
 
+    @Override
+    public void deleteNotification(String notif_id) throws SQLException, ClassNotFoundException {
+        Dbhelper dbhelper=new Dbhelper();
+        dbhelper.deleteNotification(notif_id);
+        view.refreshPage();
+        view.displayNotifications(dbhelper.getAllNotifications());
+    }
+
     private class Dbhelper implements NotificationInterface.NotificationDBhelper {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
@@ -84,6 +92,17 @@ public class NotificationPresenter implements NotificationInterface.Notification
             policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             Class.forName("com.mysql.jdbc.Driver");
+        }
+
+        @Override
+        public void deleteNotification(String notif_id) throws ClassNotFoundException, SQLException {
+            Connection();
+            Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
+            String sqlcmd="DELETE FROM notifications WHERE notif_id="+"'"+notif_id+"'";
+            Statement statement=connection.createStatement();
+            statement.execute(sqlcmd);
+            connection.close();
+            statement.close();
         }
 
         @Override
