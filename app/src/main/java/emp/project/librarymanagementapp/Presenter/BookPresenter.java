@@ -26,7 +26,7 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
     public BookPresenter(Context context, BookActivityView view) {
         this.context = context;
         this.view = view;
-        this.model=new BookModel();
+        this.model = new BookModel();
     }
 
     @Override
@@ -70,8 +70,8 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
     private class DbHelper implements BookInterface.DbHelperBooks {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
-        private String USER = "admin";
-        private String PASS = "admin";
+        private String USER = LoginActivityView.getUsername();
+        private String PASS = LoginActivityView.getPassword();
 
         @Override
         public void Connection() throws ClassNotFoundException {
@@ -150,7 +150,7 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
             Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
             for (int i = 0; i < list_cartBooks.size(); i++) {
                 String sqlcmd = "INSERT INTO bookcart(user_username,book_title,book_imageurl)VALUES(" + "'" + LoginActivityView.getUsername()
-                        + "','" + list_cartBooks.get(i).getBook_title() + "','"+list_cartBooks.get(i).getBook_url()+"')";
+                        + "','" + list_cartBooks.get(i).getBook_title() + "','" + list_cartBooks.get(i).getBook_url() + "')";
                 String sqlcmdMinusValue = "UPDATE bookslist SET book_quantity = book_quantity - 1 WHERE book_title=" + "'" + list_cartBooks.get(i).getBook_title() + "'";
                 statement = connection.createStatement();
                 statement2 = connection.createStatement();

@@ -51,9 +51,21 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
                         });
                     }
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    view.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.onFailure("Error!");
+                            view.progressBarInvisible();
+                        }
+                    });
                 } catch (SQLException e) {
-                    e.printStackTrace();
+                    view.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            view.onFailure("Error!");
+                            view.progressBarInvisible();
+                        }
+                    });
                 }
             }
         });thread.start();
@@ -64,11 +76,11 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
         view.signUpForm();
     }
 
-    private class DbHelper implements LoginInterface.LoginDbHelper{
+    private static class DbHelper implements LoginInterface.LoginDbHelper{
 
-        private String DB_NAME="jdbc:mysql://192.168.1.152:3306/librarydb";
-        private String USER="admin";
-        private String PASS="admin";
+        private static String DB_NAME="jdbc:mysql://192.168.1.152:3306/librarydb";
+        private static String USER=LoginActivityView.getUsername();
+        private static String PASS=LoginActivityView.getPassword();
 
         @Override
         public void Connection() throws ClassNotFoundException {

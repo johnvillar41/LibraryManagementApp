@@ -25,8 +25,10 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
     private Button btn_login;
     private ProgressBar progressBar;
     private TextView txt_signUp;
-    public static String username;
+    public static String username,password;
     private LoginPresenter presenter = new LoginPresenter(LoginActivityView.this);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,14 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
         LoginActivityView.username = username;
     }
 
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        LoginActivityView.password = password;
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -95,6 +105,7 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
             presenter.getLoginCredentials(txt_username.getText().toString(),
                     txt_password.getText().toString());
             setUsername(txt_username.getText().toString());
+            setPassword(txt_password.getText().toString());
         } else if (v.getId() == R.id.txt_signUp) {
             Animation animFadein = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
             txt_signUp.startAnimation(animFadein);
