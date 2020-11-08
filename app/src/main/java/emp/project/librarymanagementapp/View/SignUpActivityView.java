@@ -13,16 +13,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import emp.project.librarymanagementapp.Presenter.SignUpPresenter;
 import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("ALL")
 public class SignUpActivityView extends AppCompatActivity implements SignUpInterface.SignUpView {
-    Toolbar toolbar;
-    EditText txt_username, txt_password, txt_checkPassword;
-    Button btn_signup;
-    SignUpPresenter presenter = new SignUpPresenter(SignUpActivityView.this);
+    private Toolbar toolbar;
+    private TextInputLayout txt_username, txt_password, txt_checkPassword;
+    private Button btn_signup;
+    private SignUpPresenter presenter = new SignUpPresenter(SignUpActivityView.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,8 @@ public class SignUpActivityView extends AppCompatActivity implements SignUpInter
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.insertNewAccount(txt_username.getText().toString(),
-                        txt_password.getText().toString(), txt_checkPassword.getText().toString());
+                presenter.insertNewAccount(txt_username.getEditText().getText().toString(),
+                        txt_password.getEditText().getText().toString(), txt_checkPassword.getEditText().getText().toString());
             }
         });
     }
@@ -64,9 +66,9 @@ public class SignUpActivityView extends AppCompatActivity implements SignUpInter
 
     @Override
     public void eraseEditTexts() {
-        txt_username.getText().clear();
-        txt_password.getText().clear();
-        txt_checkPassword.getText().clear();
+        txt_username.getEditText().getText().clear();
+        txt_password.getEditText().getText().clear();
+        txt_checkPassword.getEditText().getText().clear();
     }
 
     @Override
