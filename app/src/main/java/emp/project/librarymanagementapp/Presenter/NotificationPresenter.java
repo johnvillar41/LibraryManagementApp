@@ -53,6 +53,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
             }
         });
         thread.start();
+        view.refreshPage();
     }
 
     @Override

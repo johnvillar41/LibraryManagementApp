@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.sql.SQLException;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.Models.FAQModel;
+import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.R;
 import emp.project.librarymanagementapp.View.FAQActivityView;
 

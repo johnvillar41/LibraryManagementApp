@@ -1,12 +1,5 @@
 package emp.project.librarymanagementapp.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +9,22 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewNotification;
 import emp.project.librarymanagementapp.Interfaces.NotificationInterface;
 import emp.project.librarymanagementapp.Models.NotificationModel;
+import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.R;
 
 public class NotificationActivityView extends AppCompatActivity implements NotificationInterface.NotificationViewInterface {

@@ -18,14 +18,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewIssueHistory;
 import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
+import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.R;
 
 public class IssueHistoryActivityView extends AppCompatActivity implements IssueHistoryInterface.IssueHistoryViewInterface {
-    TextView txt_number_books;
+
+    TextView txt_number_books, text_late_books;
     RecyclerView recyclerView;
     Toolbar toolbar;
     CircleImageView circleImageView;
@@ -60,8 +61,9 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
     public void InitViews() throws SQLException, ClassNotFoundException {
         toolbar = findViewById(R.id.Toolbar);
         recyclerView = findViewById(R.id.recyclerView);
-        circleImageView=findViewById(R.id.image_emptycart);
-        txt_number_books=findViewById(R.id.txt_number_books);
+        circleImageView = findViewById(R.id.image_emptycart);
+        txt_number_books = findViewById(R.id.txt_number_books);
+        text_late_books = findViewById(R.id.txt_number_latebooks);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,9 +86,9 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
 
     @Override
     public void displayIfEmptyCart(boolean isEmpty) {
-        if(isEmpty){
+        if (isEmpty) {
             circleImageView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             circleImageView.setVisibility(View.INVISIBLE);
         }
     }
@@ -94,7 +96,8 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
     @Override
     public void displayNumberOfBooks(int total_books) {
         txt_number_books.setText(String.valueOf(total_books));
-        if(total_books>5){
+        text_late_books.setText(String.valueOf(RecyclerViewIssueHistory.getLateBookNumber()));
+        if (total_books > 5) {
             txt_number_books.setTextColor(Color.parseColor("#FF0000"));
         }
     }

@@ -1,22 +1,21 @@
 package emp.project.librarymanagementapp.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import emp.project.librarymanagementapp.Presenter.SignUpPresenter;
 import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
+import emp.project.librarymanagementapp.Presenter.SignUpPresenter;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("ALL")

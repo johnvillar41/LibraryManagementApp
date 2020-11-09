@@ -1,12 +1,5 @@
 package emp.project.librarymanagementapp.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,14 +18,22 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import java.sql.SQLException;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Presenter.BookPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookCart;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookList;
 import emp.project.librarymanagementapp.Interfaces.BookInterface;
 import emp.project.librarymanagementapp.Models.BookModel;
+import emp.project.librarymanagementapp.Presenter.BookPresenter;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("Convert2Lambda")
@@ -42,6 +43,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
     private Spinner spinner;
     private Button btn_checkout;
     private EditText txt_search;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private BookPresenter presenter = new BookPresenter(null, BookActivityView.this);
 
     @Override
@@ -72,6 +74,7 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
         spinner = findViewById(R.id.spinner_category);
         btn_checkout = findViewById(R.id.btn_checkout);
         txt_search = findViewById(R.id.txt_search);
+        swipeRefreshLayout=findViewById(R.id.swipe);
 
         txt_search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -96,6 +99,14 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
                 presenter.btnCheckOutClicked();
             }
         });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.directRefreshPage();
+            }
+        });
+
         presenter.directRecyclerView();
         presenter.directBookCategory();
     }

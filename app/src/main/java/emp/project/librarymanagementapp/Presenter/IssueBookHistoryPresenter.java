@@ -12,6 +12,7 @@ import java.util.List;
 
 import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
+import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
@@ -48,6 +49,13 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
         view.displayNumberOfBooks(dbHelperIssueBook.getNumberOfBooks(LoginActivityView.getUsername()));
     }
 
+    @Override
+    public void directNewNotification(String notif_title,String notif_msg,String user_username) throws SQLException, ClassNotFoundException {
+        DbHelperIssueBook dbHelperIssueBook=new DbHelperIssueBook();
+        NotificationModel model=new NotificationModel(null,notif_title,notif_msg,user_username);
+        dbHelperIssueBook.createNewNotification(model);
+    }
+
     private class DbHelperIssueBook implements IssueHistoryInterface.IssueHistoryDbHelperInterface{
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
@@ -72,7 +80,7 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
             ResultSet resultSet=statement.executeQuery(sqlcmd);
             while(resultSet.next()){
                 model=new IssueBookModel(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),
-                        resultSet.getString(4));
+                        resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
                 list.add(model);
             }
             statement.close();
@@ -132,6 +140,18 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
             connection.close();
             resultSet.close();
             return number_books;
+        }
+
+        @Override
+        public void createNewNotification(NotificationModel model) throws ClassNotFoundException, SQLException {
+            Connection();
+            Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
+            String sqlcmd="INSERT INTO notifications(notif_title,notif_msg,user_username) VALUES("+"'"+model.getNotif_title()+"','"+model.getNotif_msg()+
+                    "','"+model.getUser_username()+"')";
+            Statement statement=connection.createStatement();
+            statement.execute(sqlcmd);
+            statement.close();
+            connection.close();
         }
     }
 }

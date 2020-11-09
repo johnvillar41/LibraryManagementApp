@@ -1,12 +1,5 @@
 package emp.project.librarymanagementapp.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -19,15 +12,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewFAQ;
 import emp.project.librarymanagementapp.Interfaces.FAQInterface;
 import emp.project.librarymanagementapp.Models.FAQModel;
+import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.R;
 
 public class FAQActivityView extends AppCompatActivity implements FAQInterface.FAQView {

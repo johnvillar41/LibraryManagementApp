@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import emp.project.librarymanagementapp.Models.IssueBookModel;
+import emp.project.librarymanagementapp.Models.NotificationModel;
 
 public interface IssueHistoryInterface {
     interface IssueHistoryViewInterface{
@@ -23,6 +24,8 @@ public interface IssueHistoryInterface {
         void directCheckCart(String username) throws SQLException, ClassNotFoundException;
 
         void directNumberBooks() throws SQLException, ClassNotFoundException;
+
+        void directNewNotification(String notif_title,String notif_msg,String user_username ) throws SQLException, ClassNotFoundException;
     }
     interface  IssueHistoryDbHelperInterface{
         void Connection() throws ClassNotFoundException;
@@ -34,5 +37,7 @@ public interface IssueHistoryInterface {
         boolean checkIfEmptyCart(String username) throws ClassNotFoundException, SQLException;
 
         int getNumberOfBooks(String username) throws ClassNotFoundException, SQLException;
+
+        void createNewNotification(NotificationModel model) throws ClassNotFoundException, SQLException;
     }
 }

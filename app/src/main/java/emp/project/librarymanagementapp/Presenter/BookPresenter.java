@@ -8,7 +8,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import emp.project.librarymanagementapp.Interfaces.BookInterface;
@@ -27,6 +30,11 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
         this.context = context;
         this.view = view;
         this.model = new BookModel();
+    }
+
+    @Override
+    public void directRefreshPage() {
+        view.refreshPage();
     }
 
     @Override
@@ -54,6 +62,7 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
         view.onFailedMessage("Successfull!");
         view.refreshPage();
     }
+
 
     @Override
     public void btnCheckOutClicked() {
@@ -144,13 +153,27 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
 
         @Override
         public void insertCartListToDB(List<BookModel> list_cartBooks) throws ClassNotFoundException, SQLException {
+            //Dates---------------
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            String dateIssue = sdf.format(c.getTime());
+            c.add(Calendar.DAY_OF_MONTH, 5);
+            String dateDeadline = sdf.format(c.getTime());
+            try{
+                c.setTime(sdf.parse(dateIssue));
+            }catch(ParseException e){
+                e.printStackTrace();
+            }
+
+            //Dates----------------
+
             Connection();
             Statement statement = null;
             Statement statement2 = null;
             Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
             for (int i = 0; i < list_cartBooks.size(); i++) {
-                String sqlcmd = "INSERT INTO bookcart(user_username,book_title,book_imageurl)VALUES(" + "'" + LoginActivityView.getUsername()
-                        + "','" + list_cartBooks.get(i).getBook_title() + "','" + list_cartBooks.get(i).getBook_url() + "')";
+                String sqlcmd = "INSERT INTO bookcart(user_username,book_title,book_imageurl,dateIssue,dateDeadline)VALUES(" + "'" + LoginActivityView.getUsername()
+                        + "','" + list_cartBooks.get(i).getBook_title() + "','" + list_cartBooks.get(i).getBook_url() + "','"+dateIssue+"','"+dateDeadline+"')";
                 String sqlcmdMinusValue = "UPDATE bookslist SET book_quantity = book_quantity - 1 WHERE book_title=" + "'" + list_cartBooks.get(i).getBook_title() + "'";
                 statement = connection.createStatement();
                 statement2 = connection.createStatement();
