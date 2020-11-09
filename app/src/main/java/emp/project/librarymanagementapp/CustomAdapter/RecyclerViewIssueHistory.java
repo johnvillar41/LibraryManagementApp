@@ -36,8 +36,6 @@ import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewIssueHistory.MyViewHolder> {
-    public static List<IssueBookModel>ListNumberOfLateBooks=new ArrayList<>();
-
     Context context;
     List<IssueBookModel> list;
     IssueBookHistoryPresenter presenter;
@@ -53,7 +51,7 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.custom_adapter_issue_history, parent, false);
-        return new RecyclerViewIssueHistory.MyViewHolder(view);
+        return new MyViewHolder(view);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -77,7 +75,6 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
             c1.setTime(Objects.requireNonNull(sdf.parse(date1)));
             c2.setTime(Objects.requireNonNull(sdf.parse(date2)));
             if (c1.after(c2)) {
-                ListNumberOfLateBooks.add(model);
                 holder.statusLayout.setBackgroundColor(Color.parseColor("#FF0000"));
                 holder.txt_book_title.setTextColor(Color.parseColor("#FF0000"));
                 presenter.directNewNotification("Book due date needs to be returned", "Return " + model.getBook_title(), LoginActivityView.getUsername());
@@ -105,7 +102,6 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
                             public void onClick(DialogInterface dialog, int which) {
                                 presenter = new IssueBookHistoryPresenter((IssueHistoryActivityView) context);
                                 try {
-                                    ListNumberOfLateBooks.remove(model);
                                     presenter.directReturnBook(model);
                                     //refresh-----------
                                     Intent intent = new Intent(context, context.getClass());
@@ -132,16 +128,11 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
         return list.size();
     }
 
-
     public IssueBookModel getItem(int position) {
         return list.get(position);
     }
 
-    public static int getLateBookNumber(){
-        return ListNumberOfLateBooks.size();
-    }
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         CircleImageView circleImageView;
         TextView txt_book_title;
         FloatingActionButton floatingActionButton;

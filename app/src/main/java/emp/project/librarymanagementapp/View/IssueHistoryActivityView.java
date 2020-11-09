@@ -72,6 +72,7 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
 
         presenter.directCheckCart(LoginActivityView.getUsername());
         presenter.directNumberBooks();
+        
     }
 
     @Override
@@ -96,7 +97,6 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
     @Override
     public void displayNumberOfBooks(int total_books) {
         txt_number_books.setText(String.valueOf(total_books));
-        text_late_books.setText(String.valueOf(RecyclerViewIssueHistory.getLateBookNumber()));
         if (total_books > 5) {
             txt_number_books.setTextColor(Color.parseColor("#FF0000"));
         }

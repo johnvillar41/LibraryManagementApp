@@ -34,6 +34,9 @@
             android:layout_alignParentEnd="true"
             android:focusable="true" />
         <EditText
+            android:editable="false"
+            android:focusable="false"
+            android:clickable="false"
             android:padding="10dp"
             android:id="@+id/txt_message"
             android:inputType="textMultiLine"
