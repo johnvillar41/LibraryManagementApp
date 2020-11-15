@@ -17,19 +17,21 @@ import emp.project.librarymanagementapp.View.SignUpActivityView;
 public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
     SignUpActivityView view;
     LoginModel model;
+    DbHelper dbHelper;
 
     public SignUpPresenter(SignUpActivityView view) {
         this.view = view;
         this.model = new LoginModel();
+        dbHelper = new DbHelper();
     }
 
     @Override
     public void insertNewAccount(String username, String password, String passwordCheck) {
         model = new LoginModel(username, password, "Pending");
         if (model.validateSignUpCredentials(passwordCheck).equals("Successfull!")) {
-            DbHelper_SignUp db = new DbHelper_SignUp();
+
             try {
-                db.insertNewAccount(model);
+                dbHelper.insertNewAccount(model);
                 view.eraseEditTexts();
                 view.displayStatusMessage(model.validateSignUpCredentials(passwordCheck));
             } catch (ClassNotFoundException e) {
@@ -46,7 +48,7 @@ public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
         }
     }
 
-    private class DbHelper_SignUp implements SignUpInterface.Dbhelper_SignUp {
+    private class DbHelper implements SignUpInterface.Dbhelper_SignUp {
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();
         private String PASS = LoginActivityView.getPassword();

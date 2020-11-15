@@ -25,11 +25,13 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
     Context context;
     BookActivityView view;
     BookModel model;
+    DbHelper dbHelper;
 
     public BookPresenter(Context context, BookActivityView view) {
         this.context = context;
         this.view = view;
         this.model = new BookModel();
+        this.dbHelper = new DbHelper();
     }
 
     @Override
@@ -39,26 +41,22 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
 
     @Override
     public void directRecyclerView() throws SQLException, ClassNotFoundException {
-        DbHelper dbHelper = new DbHelper();
         view.displayRecyclerView(dbHelper.getBook());
     }
 
     @Override
     public void directBookCategory() throws SQLException, ClassNotFoundException {
-        DbHelper dbHelper = new DbHelper();
         view.displayBookCategory(dbHelper.getBookCategory());
     }
 
     @Override
     public void directRecyclerViewBasedOnCategory(String category) throws SQLException, ClassNotFoundException {
-        DbHelper dbHelper = new DbHelper();
         view.displayRecyclerViewBasedOnCategory(dbHelper.getBookBasedOnCategory(category));
     }
 
     @Override
     public void directCartListToDB(List<BookModel> list_cartBooks) throws SQLException, ClassNotFoundException {
-        DbHelper db = new DbHelper();
-        db.insertCartListToDB(list_cartBooks);
+        dbHelper.insertCartListToDB(list_cartBooks);
         view.onFailedMessage("Successfull!");
         view.refreshPage();
     }
@@ -159,9 +157,9 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
             String dateIssue = sdf.format(c.getTime());
             c.add(Calendar.DAY_OF_MONTH, 5);
             String dateDeadline = sdf.format(c.getTime());
-            try{
+            try {
                 c.setTime(sdf.parse(dateIssue));
-            }catch(ParseException e){
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
 
@@ -173,7 +171,7 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
             Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
             for (int i = 0; i < list_cartBooks.size(); i++) {
                 String sqlcmd = "INSERT INTO bookcart(user_username,book_title,book_imageurl,dateIssue,dateDeadline)VALUES(" + "'" + LoginActivityView.getUsername()
-                        + "','" + list_cartBooks.get(i).getBook_title() + "','" + list_cartBooks.get(i).getBook_url() + "','"+dateIssue+"','"+dateDeadline+"')";
+                        + "','" + list_cartBooks.get(i).getBook_title() + "','" + list_cartBooks.get(i).getBook_url() + "','" + dateIssue + "','" + dateDeadline + "')";
                 String sqlcmdMinusValue = "UPDATE bookslist SET book_quantity = book_quantity - 1 WHERE book_title=" + "'" + list_cartBooks.get(i).getBook_title() + "'";
                 statement = connection.createStatement();
                 statement2 = connection.createStatement();

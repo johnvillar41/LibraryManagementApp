@@ -20,22 +20,22 @@ public class FAQPresenter implements FAQInterface.FAQPresenter {
 
     FAQActivityView view;
     FAQModel model;
+    DBhelper dBhelper;
 
     public FAQPresenter(FAQActivityView view) {
         this.view = view;
         this.model = new FAQModel();
+        this.dBhelper = new DBhelper();
     }
 
     @Override
     public void directToDisplayFAQ() throws SQLException, ClassNotFoundException {
-        FAQDBhelper faqdBhelper = new FAQDBhelper();
-        view.displayFaqs(faqdBhelper.displayFAQS());
+        view.displayFaqs(dBhelper.displayFAQS());
     }
 
     @Override
     public void directToNewQuestion(String question) throws SQLException, ClassNotFoundException {
-        FAQDBhelper faqdBhelper = new FAQDBhelper();
-        faqdBhelper.insertNewQuestion(question);
+        dBhelper.insertNewQuestion(question);
     }
 
     @Override
@@ -45,11 +45,10 @@ public class FAQPresenter implements FAQInterface.FAQPresenter {
 
     @Override
     public void directToRemoveFAQ(String id) throws SQLException, ClassNotFoundException {
-        FAQDBhelper faqdBhelper = new FAQDBhelper();
-        faqdBhelper.removeFAQ(id);
+        dBhelper.removeFAQ(id);
     }
 
-    private class FAQDBhelper implements FAQInterface.FAQDbhelper {
+    private class DBhelper implements FAQInterface.FAQDbhelper {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();

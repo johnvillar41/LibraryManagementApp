@@ -17,10 +17,11 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
 
     LoginActivityView view;
-    LoginModel model = new LoginModel();
+    LoginModel model;
 
     public LoginPresenter(LoginActivityView view) {
         this.view = view;
+        this.model = new LoginModel();
     }
 
     @Override

@@ -19,10 +19,12 @@ public class NotificationPresenter implements NotificationInterface.Notification
 
     NotificationActivityView view;
     NotificationModel model;
+    Dbhelper dbhelper;
 
     public NotificationPresenter(NotificationActivityView view) {
         this.view = view;
         this.model = new NotificationModel();
+        this.dbhelper = new Dbhelper();
     }
 
     @Override
@@ -36,7 +38,6 @@ public class NotificationPresenter implements NotificationInterface.Notification
                         view.displayProgressBar();
                     }
                 });
-                Dbhelper dbhelper = new Dbhelper();
                 try {
                     dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
                 } catch (ClassNotFoundException e) {
@@ -58,7 +59,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
 
     @Override
     public void getAllNotifications() {
-        Dbhelper dbhelper=new Dbhelper();
+        Dbhelper dbhelper = new Dbhelper();
         view.displayProgressBar();
         view.displayNotifications(dbhelper.getAllNotifications());
         view.hideProgressBar();
@@ -66,7 +67,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
 
     @Override
     public void onDeleteAllNotifClicked() throws SQLException, ClassNotFoundException {
-        Dbhelper dbhelper=new Dbhelper();
+        Dbhelper dbhelper = new Dbhelper();
         dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
         view.refreshPage();
         view.displayNotifications(dbhelper.getAllNotifications());
@@ -74,7 +75,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
 
     @Override
     public void deleteNotification(String notif_id) throws SQLException, ClassNotFoundException {
-        Dbhelper dbhelper=new Dbhelper();
+        Dbhelper dbhelper = new Dbhelper();
         dbhelper.deleteNotification(notif_id);
         view.refreshPage();
         view.displayNotifications(dbhelper.getAllNotifications());
@@ -98,9 +99,9 @@ public class NotificationPresenter implements NotificationInterface.Notification
         @Override
         public void deleteNotification(String notif_id) throws ClassNotFoundException, SQLException {
             Connection();
-            Connection connection=DriverManager.getConnection(DB_NAME,USER,PASS);
-            String sqlcmd="DELETE FROM notifications WHERE notif_id="+"'"+notif_id+"'";
-            Statement statement=connection.createStatement();
+            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
+            String sqlcmd = "DELETE FROM notifications WHERE notif_id=" + "'" + notif_id + "'";
+            Statement statement = connection.createStatement();
             statement.execute(sqlcmd);
             connection.close();
             statement.close();
@@ -109,7 +110,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
         @Override
         public List<NotificationModel> getAllNotifications() {
             List<NotificationModel> list = new ArrayList<>();
-            try{
+            try {
                 Connection();
                 String sqlcmd = "SELECT * FROM notifications";
                 Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
@@ -123,7 +124,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
                 statement.close();
                 resultSet.close();
                 connection.close();
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return list;
