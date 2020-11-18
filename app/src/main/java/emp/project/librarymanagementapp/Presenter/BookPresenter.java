@@ -22,12 +22,12 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 @SuppressWarnings("ALL")
 public class BookPresenter implements BookInterface.BookPresenterInterface {
 
-    Context context;
-    BookActivityView view;
-    BookModel model;
-    DbHelper dbHelper;
+    private Context context;
+    private BookInterface.BookActivityViewInterface view;
+    private BookModel model;
+    private DbHelper dbHelper;
 
-    public BookPresenter(Context context, BookActivityView view) {
+    public BookPresenter(Context context, BookInterface.BookActivityViewInterface view) {
         this.context = context;
         this.view = view;
         this.model = new BookModel();

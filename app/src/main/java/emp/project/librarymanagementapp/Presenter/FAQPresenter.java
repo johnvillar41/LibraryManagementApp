@@ -18,11 +18,11 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class FAQPresenter implements FAQInterface.FAQPresenter {
 
-    FAQActivityView view;
-    FAQModel model;
-    DBhelper dBhelper;
+    private FAQInterface.FAQView view;
+    private FAQModel model;
+    private DBhelper dBhelper;
 
-    public FAQPresenter(FAQActivityView view) {
+    public FAQPresenter(FAQInterface.FAQView view) {
         this.view = view;
         this.model = new FAQModel();
         this.dBhelper = new DBhelper();

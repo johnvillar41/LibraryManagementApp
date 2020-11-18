@@ -26,11 +26,10 @@ import emp.project.librarymanagementapp.R;
 
 public class IssueHistoryActivityView extends AppCompatActivity implements IssueHistoryInterface.IssueHistoryViewInterface {
 
-    TextView txt_number_books, text_late_books;
-    RecyclerView recyclerView;
-    Toolbar toolbar;
-    CircleImageView circleImageView;
-    IssueBookHistoryPresenter presenter = new IssueBookHistoryPresenter(IssueHistoryActivityView.this);
+    private TextView txt_number_books;
+    private RecyclerView recyclerView;
+    private CircleImageView circleImageView;
+    private IssueBookHistoryPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +58,13 @@ public class IssueHistoryActivityView extends AppCompatActivity implements Issue
 
     @Override
     public void InitViews() throws SQLException, ClassNotFoundException {
-        toolbar = findViewById(R.id.Toolbar);
+        presenter = new IssueBookHistoryPresenter(IssueHistoryActivityView.this);
+
+        Toolbar toolbar = findViewById(R.id.Toolbar);
         recyclerView = findViewById(R.id.recyclerView);
         circleImageView = findViewById(R.id.image_emptycart);
         txt_number_books = findViewById(R.id.txt_number_books);
-        text_late_books = findViewById(R.id.txt_number_latebooks);
+        TextView text_late_books = findViewById(R.id.txt_number_latebooks);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

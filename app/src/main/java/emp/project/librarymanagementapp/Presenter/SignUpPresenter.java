@@ -12,14 +12,13 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
 import emp.project.librarymanagementapp.Models.LoginModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
-import emp.project.librarymanagementapp.View.SignUpActivityView;
 
 public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
-    SignUpActivityView view;
-    LoginModel model;
-    DbHelper dbHelper;
+    private SignUpInterface.SignUpView view;
+    private LoginModel model;
+    private DbHelper dbHelper;
 
-    public SignUpPresenter(SignUpActivityView view) {
+    public SignUpPresenter(SignUpInterface.SignUpView view) {
         this.view = view;
         this.model = new LoginModel();
         dbHelper = new DbHelper();

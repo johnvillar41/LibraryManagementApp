@@ -1,5 +1,7 @@
 package emp.project.librarymanagementapp.Presenter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.StrictMode;
 
 import com.mysql.jdbc.Connection;
@@ -16,12 +18,14 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 @SuppressWarnings("ALL")
 public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
 
-    LoginActivityView view;
-    LoginModel model;
+    private LoginInterface.LoginViewInterface view;
+    private LoginModel model;
+    private Context context;
 
-    public LoginPresenter(LoginActivityView view) {
+    public LoginPresenter(LoginInterface.LoginViewInterface view, Context context) {
         this.view = view;
         this.model = new LoginModel();
+        this.context = context;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
                 try {
                     if (db.checkLoginCredentials(model) &&
                             model.validateCredentials()) {
-                        view.runOnUiThread(new Runnable() {
+                        ((Activity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 view.onSuccess("Successfully Logged In");
@@ -43,7 +47,7 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
                             }
                         });
                     } else {
-                        view.runOnUiThread(new Runnable() {
+                        ((Activity)context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 view.onFailure("Error!");
@@ -52,15 +56,16 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
                         });
                     }
                 } catch (ClassNotFoundException e) {
-                    view.runOnUiThread(new Runnable() {
+                    ((Activity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             view.onFailure("Error!");
                             view.progressBarInvisible();
                         }
                     });
+
                 } catch (SQLException e) {
-                    view.runOnUiThread(new Runnable() {
+                    ((Activity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             view.onFailure("Error!");

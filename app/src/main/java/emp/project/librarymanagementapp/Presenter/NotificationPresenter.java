@@ -1,5 +1,7 @@
 package emp.project.librarymanagementapp.Presenter;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.StrictMode;
 
 import java.sql.Connection;
@@ -17,14 +19,16 @@ import emp.project.librarymanagementapp.View.NotificationActivityView;
 
 public class NotificationPresenter implements NotificationInterface.NotificationPresenterInterface {
 
-    NotificationActivityView view;
-    NotificationModel model;
-    Dbhelper dbhelper;
+    private NotificationInterface.NotificationViewInterface view;
+    private NotificationModel model;
+    private Dbhelper dbhelper;
+    private Context context;
 
-    public NotificationPresenter(NotificationActivityView view) {
+    public NotificationPresenter(NotificationInterface.NotificationViewInterface view, Context context) {
         this.view = view;
         this.model = new NotificationModel();
         this.dbhelper = new Dbhelper();
+        this.context = context;
     }
 
     @Override
@@ -32,23 +36,28 @@ public class NotificationPresenter implements NotificationInterface.Notification
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                view.runOnUiThread(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        view.displayProgressBar();
-                    }
-                });
-                try {
-                    dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                view.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.hideProgressBar();
+                        ((Activity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.displayProgressBar();
+                            }
+                        });
+                        try {
+                            dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        ((Activity)context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.hideProgressBar();
+                            }
+                        });
                     }
                 });
             }

@@ -13,15 +13,14 @@ import java.util.List;
 import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.Models.NotificationModel;
-import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHistoryPresenterInterface {
-    IssueHistoryActivityView view;
-    IssueBookModel model;
-    DBhelper dBhelper;
+    private IssueHistoryInterface.IssueHistoryViewInterface view;
+    private IssueBookModel model;
+    private DBhelper dBhelper;
 
-    public IssueBookHistoryPresenter(IssueHistoryActivityView view) {
+    public IssueBookHistoryPresenter(IssueHistoryInterface.IssueHistoryViewInterface view) {
         this.view = view;
         this.model = new IssueBookModel();
         this.dBhelper = new DBhelper();

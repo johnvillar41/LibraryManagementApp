@@ -5,7 +5,7 @@ import emp.project.librarymanagementapp.View.MainMenuActivityView;
 
 public class MainMenuPresenter implements MainMenuInterface.MainMenuPresenter {
 
-    MainMenuActivityView view;
+    private MainMenuActivityView view;
 
     public MainMenuPresenter(MainMenuActivityView view) {
         this.view = view;

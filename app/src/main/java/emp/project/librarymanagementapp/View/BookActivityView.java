@@ -38,13 +38,10 @@ import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("Convert2Lambda")
 public class BookActivityView extends AppCompatActivity implements BookInterface.BookActivityViewInterface {
-    private Toolbar toolbar;
     private RecyclerView recyclerView;
     private Spinner spinner;
-    private Button btn_checkout;
     private EditText txt_search;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private BookPresenter presenter = new BookPresenter(null, BookActivityView.this);
+    private BookPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,8 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
 
     @Override
     public void InitViews() throws SQLException, ClassNotFoundException {
-        toolbar = findViewById(R.id.Toolbar);
+        presenter = new BookPresenter(null, BookActivityView.this);
+        Toolbar toolbar = findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,9 +70,9 @@ public class BookActivityView extends AppCompatActivity implements BookInterface
 
         recyclerView = findViewById(R.id.recyclerView);
         spinner = findViewById(R.id.spinner_category);
-        btn_checkout = findViewById(R.id.btn_checkout);
+        Button btn_checkout = findViewById(R.id.btn_checkout);
         txt_search = findViewById(R.id.txt_search);
-        swipeRefreshLayout=findViewById(R.id.swipe);
+        SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe);
 
         txt_search.addTextChangedListener(new TextWatcher() {
             @Override

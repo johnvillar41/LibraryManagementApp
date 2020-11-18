@@ -33,7 +33,7 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
     private FloatingActionButton floatingActionButton;
     private Toolbar toolbar;
     private CircleImageView circleImageView;
-    private NotificationPresenter presenter =new NotificationPresenter(NotificationActivityView.this);
+    private NotificationPresenter presenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,7 @@ public class NotificationActivityView extends AppCompatActivity implements Notif
 
     @Override
     public void InitViews() {
+        presenter =new NotificationPresenter(NotificationActivityView.this,NotificationActivityView.this);
         toolbar=findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

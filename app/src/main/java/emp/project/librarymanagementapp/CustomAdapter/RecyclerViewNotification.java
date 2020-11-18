@@ -27,7 +27,7 @@ public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewN
 
     public RecyclerViewNotification(Context context, List<NotificationModel> list) {
         this.context = context;
-        this.presenter = new NotificationPresenter((NotificationActivityView) context);
+        this.presenter = new NotificationPresenter(null,(NotificationActivityView) context);
         this.list = list;
     }
 

@@ -32,10 +32,8 @@ import emp.project.librarymanagementapp.R;
 
 public class FAQActivityView extends AppCompatActivity implements FAQInterface.FAQView {
 
-    Toolbar toolbar;
-    RecyclerView recyclerView;
-    FloatingActionButton floatingActionButton;
-    FAQPresenter presenter =new FAQPresenter(FAQActivityView.this);
+    private RecyclerView recyclerView;
+    private FAQPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +54,22 @@ public class FAQActivityView extends AppCompatActivity implements FAQInterface.F
 
     @Override
     public void InitViews() throws SQLException, ClassNotFoundException {
-        toolbar=findViewById(R.id.Toolbar);
-        recyclerView=findViewById(R.id.recyclerView);
-        floatingActionButton=findViewById(R.id.floating_action_button);
+        presenter = new FAQPresenter(FAQActivityView.this);
+        Toolbar toolbar = findViewById(R.id.Toolbar);
+        recyclerView = findViewById(R.id.recyclerView);
+        FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialogBuilder=new AlertDialog.Builder(FAQActivityView.this);
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(FAQActivityView.this);
                 LayoutInflater inflater = FAQActivityView.this.getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.popup_add_faq, null);
                 dialogBuilder.setView(dialogView);
 
-                EditText txt_question=dialogView.findViewById(R.id.txt_question);
-                Button btn_sumbit=dialogView.findViewById(R.id.btn_sumbit);
+                EditText txt_question = dialogView.findViewById(R.id.txt_question);
+                Button btn_sumbit = dialogView.findViewById(R.id.btn_sumbit);
 
-                AlertDialog dialog=dialogBuilder.create();
+                AlertDialog dialog = dialogBuilder.create();
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.show();
 
@@ -78,15 +77,15 @@ public class FAQActivityView extends AppCompatActivity implements FAQInterface.F
                     @Override
                     public void onClick(View v) {
                         try {
-                            if(txt_question.getText().length()==0){
+                            if (txt_question.getText().length() == 0) {
                                 presenter.directToErrorMessage(txt_question);
-                            }else{
+                            } else {
                                 presenter.directToNewQuestion(txt_question.getText().toString());
                                 dialog.cancel();
                                 //refresh-----------
-                                Intent intent=new Intent(FAQActivityView.this,FAQActivityView.class);
+                                Intent intent = new Intent(FAQActivityView.this, FAQActivityView.class);
                                 startActivity(intent);
-                                overridePendingTransition(0,0);
+                                overridePendingTransition(0, 0);
                                 finish();
                                 //refresh-----------
                             }
@@ -119,14 +118,14 @@ public class FAQActivityView extends AppCompatActivity implements FAQInterface.F
     }
 
     @Override
-    public void displayErrorMessage(String message,EditText textErrorField) {
-        Toast.makeText(FAQActivityView.this,message,Toast.LENGTH_SHORT).show();
+    public void displayErrorMessage(String message, EditText textErrorField) {
+        Toast.makeText(FAQActivityView.this, message, Toast.LENGTH_SHORT).show();
         textErrorField.setBackgroundResource(R.drawable.rounnded_editext_error);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
         }
         return super.onOptionsItemSelected(item);

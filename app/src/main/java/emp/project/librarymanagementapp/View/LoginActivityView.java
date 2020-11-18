@@ -29,7 +29,7 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
     private ProgressBar progressBar;
     private TextView txt_signUp;
     public static String username,password;
-    private LoginPresenter presenter = new LoginPresenter(LoginActivityView.this);
+    private LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class LoginActivityView extends AppCompatActivity implements LoginInterfa
 
     @Override
     public void InitViews() {
+        presenter = new LoginPresenter(LoginActivityView.this,LoginActivityView.this);
         txt_signUp = findViewById(R.id.txt_signUp);
         txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);

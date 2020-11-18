@@ -14,13 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import emp.project.librarymanagementapp.Interfaces.MainMenuInterface;
+import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.Presenter.MainMenuPresenter;
 import emp.project.librarymanagementapp.R;
 
 public class MainMenuActivityView extends AppCompatActivity implements MainMenuInterface.MainMenuViewInterface, View.OnClickListener {
-    TextView txt_username, txt_logout;
-    CardView booksList, issueBooks, faqs, notifs;
-    MainMenuPresenter presenter = new MainMenuPresenter(MainMenuActivityView.this);
+    private TextView txt_username, txt_logout;
+    private MainMenuPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,13 @@ public class MainMenuActivityView extends AppCompatActivity implements MainMenuI
 
     @Override
     public void InitViews() {
+        presenter = new MainMenuPresenter(MainMenuActivityView.this);
         txt_username = findViewById(R.id.txt_username);
         txt_logout = findViewById(R.id.txt_logout);
-        booksList = findViewById(R.id.booksList);
-        issueBooks = findViewById(R.id.issueBooks);
-        faqs = findViewById(R.id.faqs);
-        notifs = findViewById(R.id.notifs);
+        CardView booksList = findViewById(R.id.booksList);
+        CardView issueBooks = findViewById(R.id.issueBooks);
+        CardView faqs = findViewById(R.id.faqs);
+        CardView notifs = findViewById(R.id.notifs);
 
         txt_logout.setOnClickListener(this);
         booksList.setOnClickListener(this);

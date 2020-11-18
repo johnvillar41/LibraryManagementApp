@@ -23,7 +23,7 @@ public class SignUpActivityView extends AppCompatActivity implements SignUpInter
     private Toolbar toolbar;
     private TextInputLayout txt_username, txt_password, txt_checkPassword;
     private Button btn_signup;
-    private SignUpPresenter presenter = new SignUpPresenter(SignUpActivityView.this);
+    private SignUpPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,7 @@ public class SignUpActivityView extends AppCompatActivity implements SignUpInter
 
     @Override
     public void InitViews() {
+        presenter = new SignUpPresenter(SignUpActivityView.this);
         toolbar = findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
