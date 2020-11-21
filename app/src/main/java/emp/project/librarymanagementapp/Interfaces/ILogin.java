@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import emp.project.librarymanagementapp.Models.LoginModel;
 
-public interface LoginInterface {
+public interface ILogin {
 
     interface LoginViewInterface{
 

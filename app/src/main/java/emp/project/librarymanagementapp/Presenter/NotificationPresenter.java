@@ -12,19 +12,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Interfaces.NotificationInterface;
+import emp.project.librarymanagementapp.Interfaces.INotification;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
-import emp.project.librarymanagementapp.View.NotificationActivityView;
 
-public class NotificationPresenter implements NotificationInterface.NotificationPresenterInterface {
+public class NotificationPresenter implements INotification.NotificationPresenterInterface {
 
-    private NotificationInterface.NotificationViewInterface view;
+    private INotification.NotificationViewInterface view;
     private NotificationModel model;
     private Dbhelper dbhelper;
     private Context context;
 
-    public NotificationPresenter(NotificationInterface.NotificationViewInterface view, Context context) {
+    public NotificationPresenter(INotification.NotificationViewInterface view, Context context) {
         this.view = view;
         this.model = new NotificationModel();
         this.dbhelper = new Dbhelper();
@@ -90,7 +89,7 @@ public class NotificationPresenter implements NotificationInterface.Notification
         view.displayNotifications(dbhelper.getAllNotifications());
     }
 
-    private class Dbhelper implements NotificationInterface.NotificationDBhelper {
+    private class Dbhelper implements INotification.NotificationDBhelper {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();

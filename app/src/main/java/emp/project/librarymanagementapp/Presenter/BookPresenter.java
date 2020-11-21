@@ -14,20 +14,19 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Interfaces.BookInterface;
+import emp.project.librarymanagementapp.Interfaces.IBook;
 import emp.project.librarymanagementapp.Models.BookModel;
-import emp.project.librarymanagementapp.View.BookActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
 @SuppressWarnings("ALL")
-public class BookPresenter implements BookInterface.BookPresenterInterface {
+public class BookPresenter implements IBook.BookPresenterInterface {
 
     private Context context;
-    private BookInterface.BookActivityViewInterface view;
+    private IBook.BookActivityViewInterface view;
     private BookModel model;
     private DbHelper dbHelper;
 
-    public BookPresenter(Context context, BookInterface.BookActivityViewInterface view) {
+    public BookPresenter(Context context, IBook.BookActivityViewInterface view) {
         this.context = context;
         this.view = view;
         this.model = new BookModel();
@@ -74,7 +73,7 @@ public class BookPresenter implements BookInterface.BookPresenterInterface {
     }
 
 
-    private class DbHelper implements BookInterface.DbHelperBooks {
+    private class DbHelper implements IBook.DbHelperBooks {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();

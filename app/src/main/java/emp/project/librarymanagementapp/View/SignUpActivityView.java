@@ -14,12 +14,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
+import emp.project.librarymanagementapp.Interfaces.ISignUp;
 import emp.project.librarymanagementapp.Presenter.SignUpPresenter;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("ALL")
-public class SignUpActivityView extends AppCompatActivity implements SignUpInterface.SignUpView {
+public class SignUpActivityView extends AppCompatActivity implements ISignUp.SignUpView {
     private Toolbar toolbar;
     private TextInputLayout txt_username, txt_password, txt_checkPassword;
     private Button btn_signup;

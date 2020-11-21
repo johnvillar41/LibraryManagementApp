@@ -22,12 +22,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewNotification;
-import emp.project.librarymanagementapp.Interfaces.NotificationInterface;
+import emp.project.librarymanagementapp.Interfaces.INotification;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.R;
 
-public class NotificationActivityView extends AppCompatActivity implements NotificationInterface.NotificationViewInterface {
+public class NotificationActivityView extends AppCompatActivity implements INotification.NotificationViewInterface {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private FloatingActionButton floatingActionButton;

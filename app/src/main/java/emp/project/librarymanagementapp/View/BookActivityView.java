@@ -31,13 +31,13 @@ import java.util.List;
 
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookCart;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewBookList;
-import emp.project.librarymanagementapp.Interfaces.BookInterface;
+import emp.project.librarymanagementapp.Interfaces.IBook;
 import emp.project.librarymanagementapp.Models.BookModel;
 import emp.project.librarymanagementapp.Presenter.BookPresenter;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings("Convert2Lambda")
-public class BookActivityView extends AppCompatActivity implements BookInterface.BookActivityViewInterface {
+public class BookActivityView extends AppCompatActivity implements IBook.BookActivityViewInterface {
     private RecyclerView recyclerView;
     private Spinner spinner;
     private EditText txt_search;

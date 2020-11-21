@@ -19,12 +19,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewIssueHistory;
-import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
+import emp.project.librarymanagementapp.Interfaces.IIssueHistory;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.R;
 
-public class IssueHistoryActivityView extends AppCompatActivity implements IssueHistoryInterface.IssueHistoryViewInterface {
+public class IssueHistoryActivityView extends AppCompatActivity implements IIssueHistory.IssueHistoryViewInterface {
 
     private TextView txt_number_books;
     private RecyclerView recyclerView;

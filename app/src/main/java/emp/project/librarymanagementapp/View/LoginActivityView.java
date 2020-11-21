@@ -18,12 +18,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
-import emp.project.librarymanagementapp.Interfaces.LoginInterface;
+import emp.project.librarymanagementapp.Interfaces.ILogin;
 import emp.project.librarymanagementapp.Presenter.LoginPresenter;
 import emp.project.librarymanagementapp.R;
 
 @SuppressWarnings({"Convert2Lambda", "FieldCanBeLocal"})
-public class LoginActivityView extends AppCompatActivity implements LoginInterface.LoginViewInterface, View.OnClickListener {
+public class LoginActivityView extends AppCompatActivity implements ILogin.LoginViewInterface, View.OnClickListener {
     private TextInputLayout txt_username, txt_password;
     private Button btn_login;
     private ProgressBar progressBar;

@@ -7,7 +7,7 @@ import java.util.List;
 
 import emp.project.librarymanagementapp.Models.FAQModel;
 
-public interface FAQInterface {
+public interface IFAqs {
     interface FAQView{
         void InitViews() throws SQLException, ClassNotFoundException;
 

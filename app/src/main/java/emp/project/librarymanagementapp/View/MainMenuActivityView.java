@@ -13,12 +13,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import emp.project.librarymanagementapp.Interfaces.MainMenuInterface;
-import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
+import emp.project.librarymanagementapp.Interfaces.IMainMenu;
 import emp.project.librarymanagementapp.Presenter.MainMenuPresenter;
 import emp.project.librarymanagementapp.R;
 
-public class MainMenuActivityView extends AppCompatActivity implements MainMenuInterface.MainMenuViewInterface, View.OnClickListener {
+public class MainMenuActivityView extends AppCompatActivity implements IMainMenu.MainMenuViewInterface, View.OnClickListener {
     private TextView txt_username, txt_logout;
     private MainMenuPresenter presenter;
 

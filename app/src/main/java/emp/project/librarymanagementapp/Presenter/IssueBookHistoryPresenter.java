@@ -10,17 +10,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Interfaces.IssueHistoryInterface;
+import emp.project.librarymanagementapp.Interfaces.IIssueHistory;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
-public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHistoryPresenterInterface {
-    private IssueHistoryInterface.IssueHistoryViewInterface view;
+public class IssueBookHistoryPresenter implements IIssueHistory.IssueHistoryPresenterInterface {
+    private IIssueHistory.IssueHistoryViewInterface view;
     private IssueBookModel model;
     private DBhelper dBhelper;
 
-    public IssueBookHistoryPresenter(IssueHistoryInterface.IssueHistoryViewInterface view) {
+    public IssueBookHistoryPresenter(IIssueHistory.IssueHistoryViewInterface view) {
         this.view = view;
         this.model = new IssueBookModel();
         this.dBhelper = new DBhelper();
@@ -52,7 +52,7 @@ public class IssueBookHistoryPresenter implements IssueHistoryInterface.IssueHis
         dBhelper.createNewNotification(model);
     }
 
-    private class DBhelper implements IssueHistoryInterface.IssueHistoryDbHelperInterface {
+    private class DBhelper implements IIssueHistory.IssueHistoryDbHelperInterface {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();

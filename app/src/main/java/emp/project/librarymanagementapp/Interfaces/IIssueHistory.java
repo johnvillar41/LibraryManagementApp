@@ -6,7 +6,7 @@ import java.util.List;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 
-public interface IssueHistoryInterface {
+public interface IIssueHistory {
     interface IssueHistoryViewInterface{
         void InitViews() throws SQLException, ClassNotFoundException;
 

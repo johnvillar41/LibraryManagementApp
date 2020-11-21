@@ -11,18 +11,18 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import emp.project.librarymanagementapp.Interfaces.LoginInterface;
+import emp.project.librarymanagementapp.Interfaces.ILogin;
 import emp.project.librarymanagementapp.Models.LoginModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
 @SuppressWarnings("ALL")
-public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
+public class LoginPresenter implements ILogin.LoginPresenterInterface {
 
-    private LoginInterface.LoginViewInterface view;
+    private ILogin.LoginViewInterface view;
     private LoginModel model;
     private Context context;
 
-    public LoginPresenter(LoginInterface.LoginViewInterface view, Context context) {
+    public LoginPresenter(ILogin.LoginViewInterface view, Context context) {
         this.view = view;
         this.model = new LoginModel();
         this.context = context;
@@ -83,7 +83,7 @@ public class LoginPresenter implements LoginInterface.LoginPresenterInterface {
         view.signUpForm();
     }
 
-    private class DbHelper implements LoginInterface.LoginDbHelper {
+    private class DbHelper implements ILogin.LoginDbHelper {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();

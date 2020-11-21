@@ -9,16 +9,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-import emp.project.librarymanagementapp.Interfaces.SignUpInterface;
+import emp.project.librarymanagementapp.Interfaces.ISignUp;
 import emp.project.librarymanagementapp.Models.LoginModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
-public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
-    private SignUpInterface.SignUpView view;
+public class SignUpPresenter implements ISignUp.SignUpPresenter {
+    private ISignUp.SignUpView view;
     private LoginModel model;
     private DbHelper dbHelper;
 
-    public SignUpPresenter(SignUpInterface.SignUpView view) {
+    public SignUpPresenter(ISignUp.SignUpView view) {
         this.view = view;
         this.model = new LoginModel();
         dbHelper = new DbHelper();
@@ -47,7 +47,7 @@ public class SignUpPresenter implements SignUpInterface.SignUpPresenter {
         }
     }
 
-    private class DbHelper implements SignUpInterface.Dbhelper_SignUp {
+    private class DbHelper implements ISignUp.Dbhelper_SignUp {
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();
         private String PASS = LoginActivityView.getPassword();

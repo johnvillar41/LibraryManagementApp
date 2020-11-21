@@ -5,7 +5,7 @@ import java.util.List;
 
 import emp.project.librarymanagementapp.Models.BookModel;
 
-public interface BookInterface {
+public interface IBook {
     interface BookActivityViewInterface {
         void InitViews() throws SQLException, ClassNotFoundException;
 

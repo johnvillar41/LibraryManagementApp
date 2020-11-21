@@ -1,6 +1,6 @@
 package emp.project.librarymanagementapp.Interfaces;
 
-public interface MainMenuInterface {
+public interface IMainMenu {
     interface MainMenuViewInterface{
         void InitViews();
 

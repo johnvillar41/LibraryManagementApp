@@ -1,9 +1,9 @@
 package emp.project.librarymanagementapp.Presenter;
 
-import emp.project.librarymanagementapp.Interfaces.MainMenuInterface;
+import emp.project.librarymanagementapp.Interfaces.IMainMenu;
 import emp.project.librarymanagementapp.View.MainMenuActivityView;
 
-public class MainMenuPresenter implements MainMenuInterface.MainMenuPresenter {
+public class MainMenuPresenter implements IMainMenu.MainMenuPresenter {
 
     private MainMenuActivityView view;
 

@@ -11,18 +11,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import emp.project.librarymanagementapp.Interfaces.FAQInterface;
+import emp.project.librarymanagementapp.Interfaces.IFAqs;
 import emp.project.librarymanagementapp.Models.FAQModel;
-import emp.project.librarymanagementapp.View.FAQActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
-public class FAQPresenter implements FAQInterface.FAQPresenter {
+public class FAQPresenter implements IFAqs.FAQPresenter {
 
-    private FAQInterface.FAQView view;
+    private IFAqs.FAQView view;
     private FAQModel model;
     private DBhelper dBhelper;
 
-    public FAQPresenter(FAQInterface.FAQView view) {
+    public FAQPresenter(IFAqs.FAQView view) {
         this.view = view;
         this.model = new FAQModel();
         this.dBhelper = new DBhelper();
@@ -48,7 +47,7 @@ public class FAQPresenter implements FAQInterface.FAQPresenter {
         dBhelper.removeFAQ(id);
     }
 
-    private class DBhelper implements FAQInterface.FAQDbhelper {
+    private class DBhelper implements IFAqs.FAQDbhelper {
 
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();

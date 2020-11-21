@@ -25,12 +25,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import emp.project.librarymanagementapp.CustomAdapter.RecyclerViewFAQ;
-import emp.project.librarymanagementapp.Interfaces.FAQInterface;
+import emp.project.librarymanagementapp.Interfaces.IFAqs;
 import emp.project.librarymanagementapp.Models.FAQModel;
 import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.R;
 
-public class FAQActivityView extends AppCompatActivity implements FAQInterface.FAQView {
+public class FAQActivityView extends AppCompatActivity implements IFAqs.FAQView {
 
     private RecyclerView recyclerView;
     private FAQPresenter presenter;

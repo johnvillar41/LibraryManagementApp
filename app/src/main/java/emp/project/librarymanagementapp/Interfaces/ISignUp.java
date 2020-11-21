@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import emp.project.librarymanagementapp.Models.LoginModel;
 
-public interface SignUpInterface {
+public interface ISignUp {
     interface SignUpView{
         void InitViews();
 

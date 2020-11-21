@@ -5,7 +5,7 @@ import java.util.List;
 
 import emp.project.librarymanagementapp.Models.NotificationModel;
 
-public interface NotificationInterface {
+public interface INotification {
     interface NotificationViewInterface{
         void InitViews();
 
