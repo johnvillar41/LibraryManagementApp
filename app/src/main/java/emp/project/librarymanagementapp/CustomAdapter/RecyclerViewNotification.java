@@ -14,9 +14,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import emp.project.librarymanagementapp.Interfaces.INotification;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.NotificationRepository;
 import emp.project.librarymanagementapp.View.NotificationActivityView;
 
 public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewNotification.MyViewHolder>{
@@ -27,7 +29,7 @@ public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewN
 
     public RecyclerViewNotification(Context context, List<NotificationModel> list) {
         this.context = context;
-        this.presenter = new NotificationPresenter(null,(NotificationActivityView) context);
+        this.presenter = new NotificationPresenter((INotification.NotificationViewInterface)context, NotificationRepository.getInstance());
         this.list = list;
     }
 
@@ -54,13 +56,7 @@ public class RecyclerViewNotification extends RecyclerView.Adapter<RecyclerViewN
         holder.imageView_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    presenter.deleteNotification(model.getNotif_id());
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                presenter.deleteNotification(model.getNotif_id());
             }
         });
     }

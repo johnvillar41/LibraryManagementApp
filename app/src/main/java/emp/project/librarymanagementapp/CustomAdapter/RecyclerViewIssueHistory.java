@@ -29,9 +29,11 @@ import java.util.List;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import emp.project.librarymanagementapp.Interfaces.IIssueHistory;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.IssueBookHistoryRepository;
 import emp.project.librarymanagementapp.View.IssueHistoryActivityView;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
@@ -43,7 +45,7 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
     public RecyclerViewIssueHistory(Context context, List<IssueBookModel> list) {
         this.context = context;
         this.list = list;
-        this.presenter = new IssueBookHistoryPresenter((IssueHistoryActivityView) context);
+        this.presenter = new IssueBookHistoryPresenter((IIssueHistory.IssueHistoryViewInterface) context, IssueBookHistoryRepository.getInstance());
     }
 
     @NonNull
@@ -100,7 +102,7 @@ public class RecyclerViewIssueHistory extends RecyclerView.Adapter<RecyclerViewI
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                presenter = new IssueBookHistoryPresenter((IssueHistoryActivityView) context);
+                                presenter = new IssueBookHistoryPresenter((IIssueHistory.IssueHistoryViewInterface) context,IssueBookHistoryRepository.getInstance());
                                 try {
                                     presenter.directReturnBook(model);
                                     //refresh-----------

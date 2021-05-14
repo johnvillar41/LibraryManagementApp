@@ -23,6 +23,7 @@ import emp.project.librarymanagementapp.Interfaces.IIssueHistory;
 import emp.project.librarymanagementapp.Models.IssueBookModel;
 import emp.project.librarymanagementapp.Presenter.IssueBookHistoryPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.IssueBookHistoryRepository;
 
 public class IssueHistoryActivityView extends AppCompatActivity implements IIssueHistory.IssueHistoryViewInterface {
 
@@ -58,7 +59,7 @@ public class IssueHistoryActivityView extends AppCompatActivity implements IIssu
 
     @Override
     public void InitViews() throws SQLException, ClassNotFoundException {
-        presenter = new IssueBookHistoryPresenter(IssueHistoryActivityView.this);
+        presenter = new IssueBookHistoryPresenter(this, IssueBookHistoryRepository.getInstance());
 
         Toolbar toolbar = findViewById(R.id.Toolbar);
         recyclerView = findViewById(R.id.recyclerView);

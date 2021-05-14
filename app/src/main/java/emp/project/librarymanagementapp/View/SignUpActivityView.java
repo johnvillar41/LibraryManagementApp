@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import emp.project.librarymanagementapp.Interfaces.ISignUp;
 import emp.project.librarymanagementapp.Presenter.SignUpPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.SignUpRepository;
 
 @SuppressWarnings("ALL")
 public class SignUpActivityView extends AppCompatActivity implements ISignUp.SignUpView {
@@ -39,7 +40,7 @@ public class SignUpActivityView extends AppCompatActivity implements ISignUp.Sig
 
     @Override
     public void InitViews() {
-        presenter = new SignUpPresenter(SignUpActivityView.this);
+        presenter = new SignUpPresenter(SignUpActivityView.this, SignUpRepository.getInstance());
         toolbar = findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

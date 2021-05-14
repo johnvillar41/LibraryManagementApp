@@ -21,6 +21,7 @@ import java.util.Objects;
 import emp.project.librarymanagementapp.Interfaces.ILogin;
 import emp.project.librarymanagementapp.Presenter.LoginPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.LoginRepository;
 
 @SuppressWarnings({"Convert2Lambda", "FieldCanBeLocal"})
 public class LoginActivityView extends AppCompatActivity implements ILogin.LoginViewInterface, View.OnClickListener {
@@ -44,7 +45,7 @@ public class LoginActivityView extends AppCompatActivity implements ILogin.Login
 
     @Override
     public void InitViews() {
-        presenter = new LoginPresenter(LoginActivityView.this,LoginActivityView.this);
+        presenter = new LoginPresenter(LoginActivityView.this, LoginRepository.getInstance());
         txt_signUp = findViewById(R.id.txt_signUp);
         txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);

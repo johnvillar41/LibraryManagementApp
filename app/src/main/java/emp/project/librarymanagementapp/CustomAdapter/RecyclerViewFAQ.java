@@ -1,5 +1,6 @@
 package emp.project.librarymanagementapp.CustomAdapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.sql.SQLException;
 import java.util.List;
 
+import emp.project.librarymanagementapp.Interfaces.IFAqs;
 import emp.project.librarymanagementapp.Models.FAQModel;
 import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.FaqRepository;
 import emp.project.librarymanagementapp.View.FAQActivityView;
 
 public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyViewHolder> {
@@ -30,7 +33,7 @@ public class RecyclerViewFAQ extends RecyclerView.Adapter<RecyclerViewFAQ.MyView
     public RecyclerViewFAQ(Context context, List<FAQModel> list) {
         this.context = context;
         this.list = list;
-        this.presenter =new FAQPresenter((FAQActivityView) context);
+        this.presenter = new FAQPresenter((IFAqs.FAQView) context, FaqRepository.getInstance());
     }
 
     @NonNull
