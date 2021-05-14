@@ -29,7 +29,7 @@ public class IssueBookHistoryRepository implements IIssueHistory.IIssueHistoryRe
         }
         return instance;
     }
-    
+
     @Override
     public void Connection() throws ClassNotFoundException {
         StrictMode.ThreadPolicy policy;

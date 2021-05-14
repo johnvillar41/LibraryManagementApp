@@ -26,7 +26,7 @@ public interface ILogin {
 
         void goToSignUpForm();
     }
-    interface LoginDbHelper{
+    interface ILoginRepository {
         boolean checkLoginCredentials(LoginModel model) throws ClassNotFoundException, SQLException;
 
         void Connection() throws ClassNotFoundException;
