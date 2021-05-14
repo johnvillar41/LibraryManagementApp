@@ -1,40 +1,30 @@
 package emp.project.librarymanagementapp.Presenter;
 
-import android.os.StrictMode;
 import android.widget.EditText;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import emp.project.librarymanagementapp.Interfaces.IFAqs;
 import emp.project.librarymanagementapp.Models.FAQModel;
-import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class FAQPresenter implements IFAqs.FAQPresenter {
 
-    private IFAqs.FAQView view;
-    private FAQModel model;
-    private DBhelper dBhelper;
+    private final IFAqs.FAQView view;
+    private final IFAqs.IFaqRepository repository;
 
-    public FAQPresenter(IFAqs.FAQView view) {
+    public FAQPresenter(IFAqs.FAQView view, IFAqs.IFaqRepository repository) {
         this.view = view;
-        this.model = new FAQModel();
-        this.dBhelper = new DBhelper();
+        this.repository = repository;
     }
 
     @Override
     public void directToDisplayFAQ() throws SQLException, ClassNotFoundException {
-        view.displayFaqs(dBhelper.displayFAQS());
+        view.displayFaqs(repository.displayFAQS());
     }
 
     @Override
     public void directToNewQuestion(String question) throws SQLException, ClassNotFoundException {
-        dBhelper.insertNewQuestion(question);
+        repository.insertNewQuestion(question);
     }
 
     @Override
@@ -44,61 +34,6 @@ public class FAQPresenter implements IFAqs.FAQPresenter {
 
     @Override
     public void directToRemoveFAQ(String id) throws SQLException, ClassNotFoundException {
-        dBhelper.removeFAQ(id);
-    }
-
-    private class DBhelper implements IFAqs.FAQDbhelper {
-
-        private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
-        private String USER = LoginActivityView.getUsername();
-        private String PASS = LoginActivityView.getPassword();
-
-        @Override
-        public void Connection() throws ClassNotFoundException {
-            StrictMode.ThreadPolicy policy;
-            policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-
-        @Override
-        public List<FAQModel> displayFAQS() throws ClassNotFoundException, SQLException {
-            Connection();
-            List<FAQModel> list = new ArrayList<>();
-            String sqlcmd = "SELECT * FROM faqtable";
-            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sqlcmd);
-            while (resultSet.next()) {
-                model = new FAQModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
-                list.add(model);
-            }
-            statement.close();
-            connection.close();
-            resultSet.close();
-            return list;
-        }
-
-        @Override
-        public void insertNewQuestion(String question) throws ClassNotFoundException, SQLException {
-            Connection();
-            String sqlcmd = "INSERT INTO faqtable(faq_question,faq_reply) VALUES(" + "'" + question + "','" + "N/A" + "')";
-            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-            Statement statement = connection.createStatement();
-            statement.execute(sqlcmd);
-            statement.close();
-            connection.close();
-        }
-
-        @Override
-        public void removeFAQ(String id) throws ClassNotFoundException, SQLException {
-            Connection();
-            String sqlcmd = "DELETE FROM faqtable WHERE faq_id=" + "'" + id + "'";
-            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-            Statement statement = connection.createStatement();
-            statement.execute(sqlcmd);
-            statement.close();
-            connection.close();
-        }
+        repository.removeFAQ(id);
     }
 }

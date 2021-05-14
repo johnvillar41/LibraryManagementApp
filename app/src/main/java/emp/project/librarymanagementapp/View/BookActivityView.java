@@ -35,6 +35,7 @@ import emp.project.librarymanagementapp.Interfaces.IBook;
 import emp.project.librarymanagementapp.Models.BookModel;
 import emp.project.librarymanagementapp.Presenter.BookPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.BookRepository;
 
 @SuppressWarnings("Convert2Lambda")
 public class BookActivityView extends AppCompatActivity implements IBook.BookActivityViewInterface {
@@ -61,7 +62,7 @@ public class BookActivityView extends AppCompatActivity implements IBook.BookAct
 
     @Override
     public void InitViews() throws SQLException, ClassNotFoundException {
-        presenter = new BookPresenter(null, BookActivityView.this);
+        presenter = new BookPresenter(BookRepository.getInstance(), BookActivityView.this);
         Toolbar toolbar = findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

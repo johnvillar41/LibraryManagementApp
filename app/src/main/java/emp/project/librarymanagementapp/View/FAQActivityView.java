@@ -29,6 +29,7 @@ import emp.project.librarymanagementapp.Interfaces.IFAqs;
 import emp.project.librarymanagementapp.Models.FAQModel;
 import emp.project.librarymanagementapp.Presenter.FAQPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.FaqRepository;
 
 public class FAQActivityView extends AppCompatActivity implements IFAqs.FAQView {
 
@@ -54,7 +55,7 @@ public class FAQActivityView extends AppCompatActivity implements IFAqs.FAQView 
 
     @Override
     public void InitViews() throws SQLException, ClassNotFoundException {
-        presenter = new FAQPresenter(FAQActivityView.this);
+        presenter = new FAQPresenter(FAQActivityView.this, FaqRepository.getInstance());
         Toolbar toolbar = findViewById(R.id.Toolbar);
         recyclerView = findViewById(R.id.recyclerView);
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);

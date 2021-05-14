@@ -24,7 +24,7 @@ public interface IFAqs {
 
         void directToRemoveFAQ(String id) throws SQLException, ClassNotFoundException;
     }
-    interface FAQDbhelper{
+    interface IFaqRepository {
         void Connection() throws ClassNotFoundException;
 
         List<FAQModel>displayFAQS() throws ClassNotFoundException, SQLException;

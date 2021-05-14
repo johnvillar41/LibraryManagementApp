@@ -20,6 +20,19 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class BookRepository implements IBook.IBookRepository , DatabaseCredentials {
 
+    private static BookRepository instance = null;
+
+    private BookRepository() {
+
+    }
+
+    public static BookRepository getInstance() {
+        if (instance == null) {
+            instance = new BookRepository();
+        }
+        return instance;
+    }
+
     @Override
     public void Connection() throws ClassNotFoundException {
         StrictMode.ThreadPolicy policy;
