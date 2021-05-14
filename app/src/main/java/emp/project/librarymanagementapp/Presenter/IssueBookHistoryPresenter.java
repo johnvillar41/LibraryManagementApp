@@ -53,7 +53,6 @@ public class IssueBookHistoryPresenter implements IIssueHistory.IssueHistoryPres
     }
 
     private class DBhelper implements IIssueHistory.IssueHistoryDbHelperInterface {
-
         private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
         private String USER = LoginActivityView.getUsername();
         private String PASS = LoginActivityView.getPassword();

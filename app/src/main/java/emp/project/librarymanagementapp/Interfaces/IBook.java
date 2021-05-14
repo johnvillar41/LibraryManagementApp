@@ -40,7 +40,7 @@ public interface IBook {
         void directGetBookBasedOnSearch(String book_title) throws SQLException, ClassNotFoundException;
     }
 
-    interface DbHelperBooks {
+    interface IBookRepository {
         void Connection() throws ClassNotFoundException;
 
         List<BookModel> getBook() throws ClassNotFoundException, SQLException;
