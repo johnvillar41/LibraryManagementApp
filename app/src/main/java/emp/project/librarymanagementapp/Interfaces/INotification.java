@@ -20,13 +20,13 @@ public interface INotification {
     interface NotificationPresenterInterface {
         void onRemoveButtonClicked();
 
-        void getAllNotifications();
+        void getAllNotifications() throws SQLException, ClassNotFoundException;
 
         void onDeleteAllNotifClicked() throws SQLException, ClassNotFoundException;
 
         void deleteNotification(String notif_id) throws SQLException, ClassNotFoundException;
     }
-    interface NotificationDBhelper{
+    interface INotificationRepository {
         void Connection() throws ClassNotFoundException;
 
         void deleteNotification(String notif_id) throws ClassNotFoundException, SQLException;

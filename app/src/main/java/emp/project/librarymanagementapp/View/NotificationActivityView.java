@@ -26,6 +26,7 @@ import emp.project.librarymanagementapp.Interfaces.INotification;
 import emp.project.librarymanagementapp.Models.NotificationModel;
 import emp.project.librarymanagementapp.Presenter.NotificationPresenter;
 import emp.project.librarymanagementapp.R;
+import emp.project.librarymanagementapp.Repository.NotificationRepository;
 
 public class NotificationActivityView extends AppCompatActivity implements INotification.NotificationViewInterface {
     private RecyclerView recyclerView;
@@ -47,7 +48,7 @@ public class NotificationActivityView extends AppCompatActivity implements INoti
 
     @Override
     public void InitViews() {
-        presenter =new NotificationPresenter(NotificationActivityView.this,NotificationActivityView.this);
+        presenter =new NotificationPresenter(NotificationActivityView.this, NotificationRepository.getInstance());
         toolbar=findViewById(R.id.Toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

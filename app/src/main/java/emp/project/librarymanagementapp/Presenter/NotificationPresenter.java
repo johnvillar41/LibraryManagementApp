@@ -2,15 +2,8 @@ package emp.project.librarymanagementapp.Presenter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.StrictMode;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import emp.project.librarymanagementapp.Interfaces.INotification;
 import emp.project.librarymanagementapp.Models.NotificationModel;
@@ -18,16 +11,13 @@ import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class NotificationPresenter implements INotification.NotificationPresenterInterface {
 
-    private INotification.NotificationViewInterface view;
-    private NotificationModel model;
-    private Dbhelper dbhelper;
-    private Context context;
+    private final INotification.NotificationViewInterface view;
+    private final INotification.INotificationRepository repository;
 
-    public NotificationPresenter(INotification.NotificationViewInterface view, Context context) {
+
+    public NotificationPresenter(INotification.NotificationViewInterface view, INotification.INotificationRepository repository) {
         this.view = view;
-        this.model = new NotificationModel();
-        this.dbhelper = new Dbhelper();
-        this.context = context;
+        this.repository = repository;
     }
 
     @Override
@@ -38,25 +28,13 @@ public class NotificationPresenter implements INotification.NotificationPresente
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        ((Activity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                view.displayProgressBar();
-                            }
-                        });
                         try {
-                            dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
+                            repository.deleteAllNotifications(LoginActivityView.getUsername());
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
-                        ((Activity)context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                view.hideProgressBar();
-                            }
-                        });
                     }
                 });
             }
@@ -67,86 +45,43 @@ public class NotificationPresenter implements INotification.NotificationPresente
 
     @Override
     public void getAllNotifications() {
-        Dbhelper dbhelper = new Dbhelper();
         view.displayProgressBar();
-        view.displayNotifications(dbhelper.getAllNotifications());
+        try {
+            view.displayNotifications(repository.getAllNotifications());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         view.hideProgressBar();
     }
 
     @Override
-    public void onDeleteAllNotifClicked() throws SQLException, ClassNotFoundException {
-        Dbhelper dbhelper = new Dbhelper();
-        dbhelper.deleteAllNotifications(LoginActivityView.getUsername());
-        view.refreshPage();
-        view.displayNotifications(dbhelper.getAllNotifications());
+    public void onDeleteAllNotifClicked()  {
+        try {
+            repository.deleteAllNotifications(LoginActivityView.getUsername());
+            view.refreshPage();
+            view.displayNotifications(repository.getAllNotifications());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     @Override
-    public void deleteNotification(String notif_id) throws SQLException, ClassNotFoundException {
-        Dbhelper dbhelper = new Dbhelper();
-        dbhelper.deleteNotification(notif_id);
-        view.refreshPage();
-        view.displayNotifications(dbhelper.getAllNotifications());
-    }
-
-    private class Dbhelper implements INotification.NotificationDBhelper {
-
-        private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
-        private String USER = LoginActivityView.getUsername();
-        private String PASS = LoginActivityView.getPassword();
-
-
-        @Override
-        public void Connection() throws ClassNotFoundException {
-            StrictMode.ThreadPolicy policy;
-            policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-
-        @Override
-        public void deleteNotification(String notif_id) throws ClassNotFoundException, SQLException {
-            Connection();
-            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-            String sqlcmd = "DELETE FROM notifications WHERE notif_id=" + "'" + notif_id + "'";
-            Statement statement = connection.createStatement();
-            statement.execute(sqlcmd);
-            connection.close();
-            statement.close();
-        }
-
-        @Override
-        public List<NotificationModel> getAllNotifications() {
-            List<NotificationModel> list = new ArrayList<>();
-            try {
-                Connection();
-                String sqlcmd = "SELECT * FROM notifications";
-                Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sqlcmd);
-                while (resultSet.next()) {
-                    model = new NotificationModel(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
-                            resultSet.getString(4));
-                    list.add(model);
-                }
-                statement.close();
-                resultSet.close();
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return list;
-        }
-
-        @Override
-        public void deleteAllNotifications(String username) throws ClassNotFoundException, SQLException {
-            Connection();
-            String sqlcmd = "DELETE FROM notifications WHERE user_username=" + "'" + username + "'";
-            Connection connection = DriverManager.getConnection(DB_NAME, USER, PASS);
-            Statement statement = connection.createStatement();
-            statement.execute(sqlcmd);
-            statement.close();
-            connection.close();
+    public void deleteNotification(String notif_id)  {
+        try {
+            repository.deleteNotification(notif_id);
+            view.refreshPage();
+            view.displayNotifications(repository.getAllNotifications());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
+
+
 }
