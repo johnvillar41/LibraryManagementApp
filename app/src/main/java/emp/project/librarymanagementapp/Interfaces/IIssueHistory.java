@@ -27,7 +27,7 @@ public interface IIssueHistory {
 
         void directNewNotification(String notif_title,String notif_msg,String user_username ) throws SQLException, ClassNotFoundException;
     }
-    interface  IssueHistoryDbHelperInterface{
+    interface IIssueHistoryRepository {
         void Connection() throws ClassNotFoundException;
 
         List<IssueBookModel> getIssueBooks(String username) throws ClassNotFoundException, SQLException;
