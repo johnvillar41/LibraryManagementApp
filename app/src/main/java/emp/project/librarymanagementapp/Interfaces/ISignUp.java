@@ -16,7 +16,7 @@ public interface ISignUp {
         void insertNewAccount(String username,String password,String passwordCheck);
 
     }
-    interface Dbhelper_SignUp {
+    interface ISignUpRepository {
         void Connection() throws ClassNotFoundException;
 
         void insertNewAccount(LoginModel model) throws ClassNotFoundException, SQLException;

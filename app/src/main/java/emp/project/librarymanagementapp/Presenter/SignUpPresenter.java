@@ -1,11 +1,5 @@
 package emp.project.librarymanagementapp.Presenter;
 
-import android.os.StrictMode;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
-
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -14,23 +8,21 @@ import emp.project.librarymanagementapp.Models.LoginModel;
 import emp.project.librarymanagementapp.View.LoginActivityView;
 
 public class SignUpPresenter implements ISignUp.SignUpPresenter {
-    private ISignUp.SignUpView view;
-    private LoginModel model;
-    private DbHelper dbHelper;
+    private final ISignUp.SignUpView view;
+    private final ISignUp.ISignUpRepository repository;
 
-    public SignUpPresenter(ISignUp.SignUpView view) {
+    public SignUpPresenter(ISignUp.SignUpView view,ISignUp.ISignUpRepository repository) {
         this.view = view;
-        this.model = new LoginModel();
-        dbHelper = new DbHelper();
+        this.repository = repository;
     }
 
     @Override
     public void insertNewAccount(String username, String password, String passwordCheck) {
-        model = new LoginModel(username, password, "Pending");
+        LoginModel model = new LoginModel(username, password, "Pending");
         if (model.validateSignUpCredentials(passwordCheck).equals("Successfull!")) {
 
             try {
-                dbHelper.insertNewAccount(model);
+                repository.insertNewAccount(model);
                 view.eraseEditTexts();
                 view.displayStatusMessage(model.validateSignUpCredentials(passwordCheck));
             } catch (ClassNotFoundException e) {
@@ -46,30 +38,4 @@ public class SignUpPresenter implements ISignUp.SignUpPresenter {
             view.displayStatusMessage(model.validateSignUpCredentials(passwordCheck));
         }
     }
-
-    private class DbHelper implements ISignUp.Dbhelper_SignUp {
-        private String DB_NAME = "jdbc:mysql://192.168.1.152:3306/librarydb";
-        private String USER = LoginActivityView.getUsername();
-        private String PASS = LoginActivityView.getPassword();
-
-        @Override
-        public void Connection() throws ClassNotFoundException {
-            StrictMode.ThreadPolicy policy;
-            policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-            Class.forName("com.mysql.jdbc.Driver");
-        }
-
-        @Override
-        public void insertNewAccount(LoginModel model) throws ClassNotFoundException, SQLException {
-            Connection();
-            Connection connection = (Connection) DriverManager.getConnection(DB_NAME, USER, PASS);
-            String sqlcmd = "INSERT INTO userlogin(user_username,user_password,user_status)VALUES(" + "'" + model.getUser_username() + "','" + model.getUser_password() + "','" + model.getUser_status() + "')";
-            Statement statement = (Statement) connection.createStatement();
-            statement.execute(sqlcmd);
-            statement.close();
-            connection.close();
-        }
-    }
-
 }
